@@ -1,0 +1,2027 @@
+{
+    "ClientConfiguration": {
+        "ConfigurationName": "Новая конфигурация",
+        "ConfigurationDescription": "Разработка новой конфигурации SimpleUI",
+        "ConfigurationVersion": "0.0.1",
+        "Processes": [
+            {
+                "type": "Process",
+                "ProcessName": "Новый процесс",
+                "PlanFactHeader": "План",
+                "hidden": true,
+                "Operations": [
+                    {
+                        "type": "Operation",
+                        "Name": "Новый экран",
+                        "Elements": []
+                    }
+                ]
+            },
+            {
+                "ProcessName": "Единицы",
+                "type": "Process",
+                "Operations": [
+                    {
+                        "Name": "list_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_plus",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(units)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "open_object_form(units,edit_form)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object_form(units,edit_form,?)",
+                                "postExecute": "",
+                                "listener": "btn_plus"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(units,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "set",
+                                "method": "FinishProcess",
+                                "postExecute": "",
+                                "listener": "ON_BACK_PRESSED"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form",
+                        "hideBottomBarScreen": true,
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"Наим.\", \"default_text\": \"@name\"}",
+                                        "Variable": "name"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "save",
+                                "Variable": "btn_save",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "#f1f8",
+                                "Variable": "del",
+                                "type": "MenuItem",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object(units)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "del",
+                                "type": "pythonargs",
+                                "method": "save_object(units,delete)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_save",
+                                "type": "pythonargs",
+                                "method": "save_object(units)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "ON_BACK_PRESSED",
+                                "type": "pythonargs",
+                                "method": "close_without_saving(units)",
+                                "postExecute": ""
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "selection_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "runasync",
+                                "type": "pythonargs",
+                                "method": "set_class_list(units)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "return_result()",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(units,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            }
+                        ]
+                    }
+                ],
+                "DefineOnBackPressed": true
+            },
+            {
+                "ProcessName": "Продукция",
+                "type": "Process",
+                "Operations": [
+                    {
+                        "Name": "list_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_plus",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(testunits)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "open_object_form(testunits,edit_form)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object_form(testunits,edit_form,?)",
+                                "postExecute": "",
+                                "listener": "btn_plus"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(testunits,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "set",
+                                "method": "FinishProcess",
+                                "postExecute": "",
+                                "listener": "ON_BACK_PRESSED"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form",
+                        "hideBottomBarScreen": true,
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"Наименование\", \"default_text\": \"@name\"}",
+                                        "Variable": "name"
+                                    },
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"Кол-во в упаковке\", \"input_type\": 4, \"default_text\": \"@unit\"}",
+                                        "Variable": "unit"
+                                    },
+                                    {
+                                        "type": "CheckBox",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "Единица",
+                                        "Variable": "lots",
+                                        "gravity_horizontal": "left"
+                                    },
+                                    {
+                                        "type": "TextView",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "Ед.",
+                                        "gravity_horizontal": "center"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@obj_view",
+                                        "Variable": "obj"
+                                    },
+                                    {
+                                        "type": "TextView",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "Ячейка",
+                                        "gravity_horizontal": "center"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cell_view",
+                                        "Variable": "cell"
+                                    },
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\":\"Дата регистрации\",\"default_text\":\"@date_reg\",\"input_type\":4}",
+                                        "Variable": "date_reg",
+                                        "gravity_horizontal": "center"
+                                    },
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"Комментарий\", \"input_type\": 131073, \"default_text\": \"@description\"}",
+                                        "Variable": "description",
+                                        "gravity_horizontal": "left"
+                                    },
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "wrap_content",
+                                        "width": "wrap_content",
+                                        "weight": "0"
+                                    },
+                                    {
+                                        "type": "TextView",
+                                        "height": "wrap_content",
+                                        "width": "wrap_content",
+                                        "weight": "0"
+                                    },
+                                    {
+                                        "type": "Button",
+                                        "height": "wrap_content",
+                                        "width": "wrap_content",
+                                        "weight": "0"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "save",
+                                "Variable": "btn_save",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "#f1f8",
+                                "Variable": "del",
+                                "type": "MenuItem",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "obj",
+                                "type": "pythonargs",
+                                "method": "start_selection_for_field(Единицы,selection_form,obj,)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "obj_res",
+                                "type": "pythonargs",
+                                "method": "set_object_value(obj,)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "cell",
+                                "type": "pythonargs",
+                                "method": "start_selection_for_field(Ячейки,selection_form,cell,1)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "cell_res",
+                                "type": "pythonargs",
+                                "method": "set_object_value(cell,1)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object(testunits)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "del",
+                                "type": "pythonargs",
+                                "method": "save_object(testunits,delete)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_save",
+                                "type": "pythonargs",
+                                "method": "save_object(testunits)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "ON_BACK_PRESSED",
+                                "type": "pythonargs",
+                                "method": "close_without_saving(testunits)",
+                                "postExecute": ""
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "selection_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "runasync",
+                                "type": "pythonargs",
+                                "method": "set_class_list(testunits)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "return_result()",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(testunits,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            }
+                        ]
+                    }
+                ],
+                "DefineOnBackPressed": true
+            },
+            {
+                "ProcessName": "Товары",
+                "type": "Process",
+                "Operations": [
+                    {
+                        "Name": "list_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_plus",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(goods)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "open_object_form(goods,edit_form)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object_form(goods,edit_form,?)",
+                                "postExecute": "",
+                                "listener": "btn_plus"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(goods,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "set",
+                                "method": "FinishProcess",
+                                "postExecute": "",
+                                "listener": "ON_BACK_PRESSED"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form",
+                        "hideBottomBarScreen": true,
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"name\", \"default_text\": \"@name\"}",
+                                        "Variable": "name"
+                                    },
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"barcode\", \"default_text\": \"@barcode\"}",
+                                        "Variable": "barcode"
+                                    },
+                                    {
+                                        "type": "TextView",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "unit",
+                                        "gravity_horizontal": "center"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@unit_view",
+                                        "Variable": "unit"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "save",
+                                "Variable": "btn_save",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "#f1f8",
+                                "Variable": "del",
+                                "type": "MenuItem",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "unit",
+                                "type": "pythonargs",
+                                "method": "start_selection_for_field(Единицы,selection_form,unit,)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "unit_res",
+                                "type": "pythonargs",
+                                "method": "set_object_value(unit,)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object(goods)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "del",
+                                "type": "pythonargs",
+                                "method": "save_object(goods,delete)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_save",
+                                "type": "pythonargs",
+                                "method": "save_object(goods)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "ON_BACK_PRESSED",
+                                "type": "pythonargs",
+                                "method": "close_without_saving(goods)",
+                                "postExecute": ""
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "selection_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "runasync",
+                                "type": "pythonargs",
+                                "method": "set_class_list(goods)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "return_result()",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(goods,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            }
+                        ]
+                    }
+                ],
+                "DefineOnBackPressed": true
+            },
+            {
+                "ProcessName": "operation_order",
+                "type": "Process",
+                "Operations": [
+                    {
+                        "Name": "list_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_plus",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(operation_order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "open_object_form(operation_order,edit_form)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object_form(operation_order,edit_form,?)",
+                                "postExecute": "",
+                                "listener": "btn_plus"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(operation_order,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "set",
+                                "method": "FinishProcess",
+                                "postExecute": "",
+                                "listener": "ON_BACK_PRESSED"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form",
+                        "hideBottomBarScreen": true,
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"sku\", \"default_text\": \"@sku\"}",
+                                        "Variable": "sku"
+                                    },
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"qty\", \"input_type\": 4, \"default_text\": \"@qty\"}",
+                                        "Variable": "qty"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "save",
+                                "Variable": "btn_save",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "#f1f8",
+                                "Variable": "del",
+                                "type": "MenuItem",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object(operation_order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "del",
+                                "type": "pythonargs",
+                                "method": "save_object(operation_order,delete)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_save",
+                                "type": "pythonargs",
+                                "method": "save_object(operation_order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "ON_BACK_PRESSED",
+                                "type": "pythonargs",
+                                "method": "close_without_saving(operation_order)",
+                                "postExecute": ""
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "selection_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "runasync",
+                                "type": "pythonargs",
+                                "method": "set_class_list(operation_order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "return_result()",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(operation_order,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            }
+                        ]
+                    }
+                ],
+                "hidden": true,
+                "DefineOnBackPressed": true
+            },
+            {
+                "ProcessName": "Заявки",
+                "type": "Process",
+                "Operations": [
+                    {
+                        "Name": "list_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_plus",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "open_object_form(order,edit_form)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object_form(order,edit_form,?)",
+                                "postExecute": "",
+                                "listener": "btn_plus"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(order,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "set",
+                                "method": "FinishProcess",
+                                "postExecute": "",
+                                "listener": "ON_BACK_PRESSED"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form operation_order",
+                        "hideBottomBarScreen": true,
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"sku\", \"default_text\": \"@sku\"}",
+                                        "Variable": "sku"
+                                    },
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"qty\", \"input_type\": 4, \"default_text\": \"@qty\"}",
+                                        "Variable": "qty"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "save",
+                                "Variable": "btn_save",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "#f1f8",
+                                "Variable": "del",
+                                "type": "MenuItem",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object(operation_order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "del",
+                                "type": "pythonargs",
+                                "method": "save_object(operation_order,delete)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_save",
+                                "type": "pythonargs",
+                                "method": "save_object(operation_order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "ON_BACK_PRESSED",
+                                "type": "pythonargs",
+                                "method": "close_without_saving(operation_order)",
+                                "postExecute": ""
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form",
+                        "hideBottomBarScreen": true,
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"Получатель\", \"default_text\": \"@customer\"}",
+                                        "Variable": "customer"
+                                    },
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"Тип операции\", \"default_text\": \"@type\"}",
+                                        "Variable": "type"
+                                    },
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "0",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_add",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "save",
+                                "Variable": "btn_save",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "#f1f8",
+                                "Variable": "del",
+                                "type": "MenuItem",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_container_list(operation_order,operations)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_add",
+                                "type": "pythonargs",
+                                "method": "open_object_form(order,edit_form operation_order,?)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "open_object_form(order,edit_form operation_order,??)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object(order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "del",
+                                "type": "pythonargs",
+                                "method": "save_object(order,delete)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_save",
+                                "type": "pythonargs",
+                                "method": "save_object(order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "ON_BACK_PRESSED",
+                                "type": "pythonargs",
+                                "method": "close_without_saving(order)",
+                                "postExecute": ""
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "selection_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "runasync",
+                                "type": "pythonargs",
+                                "method": "set_class_list(order)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "return_result()",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(order,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            }
+                        ]
+                    }
+                ],
+                "DefineOnBackPressed": true
+            },
+            {
+                "ProcessName": "Ячейки",
+                "type": "Process",
+                "Operations": [
+                    {
+                        "Name": "list_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_plus",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(cell)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "open_object_form(cell,edit_form)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object_form(cell,edit_form,?)",
+                                "postExecute": "",
+                                "listener": "btn_plus"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(cell,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "set",
+                                "method": "FinishProcess",
+                                "postExecute": "",
+                                "listener": "ON_BACK_PRESSED"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form",
+                        "hideBottomBarScreen": true,
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"Наименование\", \"default_text\": \"@name\"}",
+                                        "Variable": "name"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "save",
+                                "Variable": "btn_save",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "#f1f8",
+                                "Variable": "del",
+                                "type": "MenuItem",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object(cell)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "del",
+                                "type": "pythonargs",
+                                "method": "save_object(cell,delete)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_save",
+                                "type": "pythonargs",
+                                "method": "save_object(cell)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "ON_BACK_PRESSED",
+                                "type": "pythonargs",
+                                "method": "close_without_saving(cell)",
+                                "postExecute": ""
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "selection_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "runasync",
+                                "type": "pythonargs",
+                                "method": "set_class_list(cell)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "return_result()",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(cell,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            }
+                        ]
+                    }
+                ],
+                "DefineOnBackPressed": true
+            },
+            {
+                "ProcessName": "Склады",
+                "type": "Process",
+                "Operations": [
+                    {
+                        "Name": "list_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_plus",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(warehouse)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "open_object_form(warehouse,edit_form)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object_form(warehouse,edit_form,?)",
+                                "postExecute": "",
+                                "listener": "btn_plus"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(warehouse,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "set",
+                                "method": "FinishProcess",
+                                "postExecute": "",
+                                "listener": "ON_BACK_PRESSED"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form cell",
+                        "hideBottomBarScreen": true,
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"Наименование\", \"default_text\": \"@name\"}",
+                                        "Variable": "name"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "#f1f8",
+                                "Variable": "del",
+                                "type": "MenuItem",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object(cell)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "del",
+                                "type": "pythonargs",
+                                "method": "delete_object_ref(cell)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_save",
+                                "type": "pythonargs",
+                                "method": "save_object(cell)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "ON_BACK_PRESSED",
+                                "type": "pythonargs",
+                                "method": "close_without_saving(cell)",
+                                "postExecute": ""
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form",
+                        "hideBottomBarScreen": true,
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "ModernEditText",
+                                        "height": "wrap_content",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "{\"hint\": \"Наименование\", \"default_text\": \"@name\"}",
+                                        "Variable": "name"
+                                    },
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "0",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_add",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "save",
+                                "Variable": "btn_save",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            },
+                            {
+                                "Value": "#f1f8",
+                                "Variable": "del",
+                                "type": "MenuItem",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_container_list_ref(cell,cells)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_add",
+                                "type": "pythonargs",
+                                "method": "open_object_form_ref(warehouse,Ячейки|selection_form,?)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "cell_res",
+                                "type": "pythonargs",
+                                "method": "add_object_ref(warehouse,cell)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "open_object_form_ref(warehouse,edit_form cell,??)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "open_object(warehouse)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "del",
+                                "type": "pythonargs",
+                                "method": "save_object(warehouse,delete)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "btn_save",
+                                "type": "pythonargs",
+                                "method": "save_object(warehouse)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "ON_BACK_PRESSED",
+                                "type": "pythonargs",
+                                "method": "close_without_saving(warehouse)",
+                                "postExecute": ""
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "selection_form",
+                        "type": "Operation",
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "match_parent",
+                                "width": "match_parent",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "match_parent",
+                                        "width": "match_parent",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "runasync",
+                                "type": "pythonargs",
+                                "method": "set_class_list(warehouse)",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "listener": "CardsClick",
+                                "type": "pythonargs",
+                                "method": "return_result()",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onInput",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "set_class_list(warehouse,edit_form,search)",
+                                "postExecute": "",
+                                "listener": "Search"
+                            }
+                        ]
+                    }
+                ],
+                "DefineOnBackPressed": true
+            },
+            {
+                "ProcessName": "Внутренние заказы",
+                "type": "Process",
+                "Operations": [
+                    {
+                        "Name": "Список",
+                        "type": "Operation",
+                        "Elements": [
+                            {
+                                "type": "LinearLayout",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content",
+                                "orientation": "vertical",
+                                "Elements": [
+                                    {
+                                        "type": "CardsLayout",
+                                        "height": "wrap_content",
+                                        "width": "wrap_content",
+                                        "weight": "0",
+                                        "Value": "@cards"
+                                    }
+                                ]
+                            },
+                            {
+                                "Value": "plus",
+                                "Variable": "btn_plus",
+                                "type": "fab",
+                                "weight": "0",
+                                "height": "wrap_content",
+                                "width": "wrap_content"
+                            }
+                        ],
+                        "noScroll": true,
+                        "hideBottomBarScreen": true,
+                        "Handlers": [
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "OnStartInnerOrders(\"innerorders\")",
+                                "postExecute": ""
+                            },
+                            {
+                                "event": "onStart",
+                                "action": "run",
+                                "type": "pythonargs",
+                                "method": "",
+                                "postExecute": "",
+                                "listener": "btn_plus"
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "edit_form",
+                        "type": "Operation",
+                        "Elements": []
+                    },
+                    {
+                        "Name": "selection_form",
+                        "type": "Operation",
+                        "Elements": []
+                    }
+                ],
+                "PlanFactHeader": "fS"
+            }
+        ],
+        "ConfigurationSettings": {
+            "uid": "ab66d68a1d85487ca8ae63dbcd6482ab",
+            "dictionaries": "",
+            "vendor": "",
+            "vendor_url": "",
+            "vendor_password": "",
+            "handler_split_mode": false,
+            "handler_url": "",
+            "handler_password": ""
+        },
+        "ConfigurationTags": "Py,off-line",
+        "arch2": true,
+        "Classes": [
+            {
+                "_id": "units",
+                "_title": "Единицы",
+                "name(Наим.)": "text",
+                "_edit_form": "edit_form",
+                "_list_form": "list_form",
+                "_selection_form": "selection_form"
+            },
+            {
+                "_id": "testunits",
+                "_title": "Продукция",
+                "name(Наименование)": "*text",
+                "unit(Кол-во в упаковке)": "number",
+                "lots(Единица)": "boolean",
+                "obj(Ед.)": "_units",
+                "cell(Ячейка)": "_cell_ref",
+                "date_reg(Дата регистрации)": "date",
+                "description(Комментарий)": "*multiline",
+                "_edit_form": "edit_form",
+                "_list_form": "list_form",
+                "_selection_form": "selection_form",
+                "_name_index": "text",
+                "_description_index": "multiline",
+                "_index": "text"
+            },
+            {
+                "_id": "goods",
+                "_title": "Товары",
+                "name": "*text",
+                "barcode": "*text",
+                "unit": "_units",
+                "_edit_form": "edit_form",
+                "_list_form": "list_form",
+                "_selection_form": "selection_form",
+                "_index": "text"
+            },
+            {
+                "_id": "operation_order",
+                "sku": "text",
+                "qty": "number",
+                "_edit_form": "edit_form",
+                "_list_form": "list_form",
+                "_selection_form": "selection_form"
+            },
+            {
+                "_id": "order",
+                "_title": "Заявки",
+                "customer(Получатель)": "*text",
+                "type(Тип операции)": "text",
+                "operations": [
+                    "operation_order"
+                ],
+                "_edit_form": "edit_form",
+                "_list_form": "list_form",
+                "_selection_form": "selection_form",
+                "_customer_index": "text",
+                "_index": "text"
+            },
+            {
+                "_id": "cell",
+                "_title": "Ячейки",
+                "name(Наименование)": "*text",
+                "_list_form": "list_form",
+                "_edit_form": "edit_form",
+                "_selection_form": "selection_form",
+                "_name_index": "text",
+                "_index": "text"
+            },
+            {
+                "_id": "warehouse",
+                "_title": "Склады",
+                "name(Наименование)": "*text",
+                "cells": [
+                    "cell_ref"
+                ],
+                "_list_form": "list_form",
+                "_edit_form": "edit_form",
+                "_selection_form": "selection_form",
+                "_name_index": "text",
+                "_index": "text"
+            }
+        ],
+        "PyHandlers": "IzEKZnJvbSBweXNpbXBsZWJhc2UgaW1wb3J0IFNpbXBsZUJhc2UsREJTZXNzaW9uCmZyb20gcnUudHJhdmVsZm9vZC5zaW1wbGVfdWkgaW1wb3J0IFNpbXBsZVV0aWxpdGVzIGFzIHN1Q2xhc3MKZnJvbSBydS50cmF2ZWxmb29kLnNpbXBsZV91aSBpbXBvcnQgSW1wb3J0VXRpbHMgYXMgaXVDbGFzcwppbXBvcnQganNvbgppbXBvcnQgcmFuZG9tCmltcG9ydCB1dWlkCgojY3JlYXRpZyBkYXRhYmFzZS4gcmVwbGFzZSBkYXRhYmFzZSBuYW1lIHdpdGggeW91ciBzcGVjaWZpZWQgbmFtZQpkYiA9IFNpbXBsZUJhc2UoImdlbmVyYXRvcl90ZXN0IixwYXRoPXN1Q2xhc3MuZ2V0X3NpbXBsZWJhc2VfZGlyKCkpCgpkZWYgT25TdGFydElubmVyT3JkZXJzKGhhc2hNYXAsICphcmdzKToKICAgIHByaW50KCJPblN0YXJ0IikKICAgIGhhc2hNYXAucHV0KCJyZXR1cm5fc2VsZWN0ZWRfZGF0YSIsIiIpCiAgICBqID0geyAiY3VzdG9tY2FyZHMiOiAgICAgICAgIHsKICAgICAgICAgICAgIm9wdGlvbnMiOnsKICAgICAgICAgICAgICAic2VhcmNoX2VuYWJsZWQiOlRydWUsCiAgICAgICAgICAgICAgInNhdmVfcG9zaXRpb24iOlRydWUsCiAgICAgICAgICAgICAgIm92ZXJyaWRlX3NlYXJjaCI6VHJ1ZQoKICAgICAgICAgICAgfSwKICAgICAgICAgICAgImxheW91dCI6IHsKICAgICAgICAgICAgICAgICJ0eXBlIjogIkxpbmVhckxheW91dCIsCiAgICAgICAgICAgICAgICAib3JpZW50YXRpb24iOiAidmVydGljYWwiLAogICAgICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAgICAgIndpZHRoIjogIm1hdGNoX3BhcmVudCIsCiAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjEiLAogICAgICAgICAgICAgICAgIkVsZW1lbnRzIjogWyBdCiAgICAgICAgICAgICAgICB9CgogICAgfQogICAgfQogICAgZmllbGRfZWxlbWVudHM9W10KICAgIGxpbmUgPXsKICAgICAgICAgICJ0eXBlIjogIkxpbmVhckxheW91dCIsCiAgICAgICAgICAib3JpZW50YXRpb24iOiAiaG9yaXpvbnRhbCIsCiAgICAgICAgICAiaGVpZ2h0IjogIndyYXBfY29udGVudCIsCiAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAiRWxlbWVudHMiOiBbCgkJICB7CiAgICAgICAgICAgICJ0eXBlIjogIlRleHRWaWV3IiwKICAgICAgICAgICAgInNob3dfYnlfY29uZGl0aW9uIjogIiIsCiAgICAgICAgICAgICJWYWx1ZSI6ICIgICAg4oSWINCb0KLQmjAwMDAwMDEyMyDQvtGCIDEyLjEyLjIwMjMgICAgIiwKICAgICAgICAgICAgIlRleHRCb2xkIjogVHJ1ZSwKICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgIndlaWdodCI6ICIxIiwKICAgICAgICAgICAgImdyYXZpdHlfaG9yaXpvbnRhbCI6ICJjZW50ZXIiCiAgICAgICAgICB9LAoJCSAgewogICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIlRleHRWaWV3IiwKICAgICAgICAgICAgICAgICAgICAic2hvd19ieV9jb25kaXRpb24iOiAiIiwKICAgICAgICAgICAgICAgICAgICAiVmFsdWUiOiAiQHN1bSIsCiAgICAgICAgICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAgICAgICAgICJ3aWR0aCI6ICJtYXRjaF9wYXJlbnQiLAoJCQkJCSJUZXh0Qm9sZCI6IFRydWUsCgkJCQkJIlRleHRTaXplIjogMTYsCiAgICAgICAgICAgICAgICAgICAgIndlaWdodCI6ICIzIiwKICAgICAgICAgICAgICAgICAgICAiZ3Jhdml0eV9ob3Jpem9udGFsIjogInJpZ2h0IgogICAgICAgICAgfV0KICAgICAgICAgIH0KICAgIGZpZWxkX2VsZW1lbnRzLmFwcGVuZChsaW5lKQogICAgbGluZSA9IHsKICAgICAgICAgICAgICAgICJ0eXBlIjogIkxpbmVhckxheW91dCIsCiAgICAgICAgICAgICAgICAib3JpZW50YXRpb24iOiAiaG9yaXpvbnRhbCIsCiAgICAgICAgICAgICAgICAiaGVpZ2h0IjogIndyYXBfY29udGVudCIsCiAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAgICAgICAiRWxlbWVudHMiOiBbCiAgICAgICAgICAgICAgIHsKCiAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAiVGV4dFZpZXciLAogICAgICAgICAgICAgICAgICAgICJzaG93X2J5X2NvbmRpdGlvbiI6ICIiLAogICAgICAgICAgICAgICAgICAgICJWYWx1ZSI6ICLQl9Cw0LrQsNC30YfQuNC6OiAiLAogICAgICAgICAgICAgICAgICAgICJoZWlnaHQiOiAid3JhcF9jb250ZW50IiwKICAgICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjMiLAogICAgICAgICAgICAgICAgICAgICJncmF2aXR5X2hvcml6b250YWwiOiAibGVmdCIKICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICB7CgogICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIlRleHRWaWV3IiwKICAgICAgICAgICAgICAgICAgICAic2hvd19ieV9jb25kaXRpb24iOiAiIiwKICAgICAgICAgICAgICAgICAgICAiVmFsdWUiOiAiQG9yZGVyX29wZW4iLAogICAgICAgICAgICAgICAgICAgICJoZWlnaHQiOiAid3JhcF9jb250ZW50IiwKICAgICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjEiLAogICAgICAgICAgICAgICAgICAgICJUZXh0Qm9sZCI6IFRydWUsCiAgICAgICAgICAgICAgICAgICAgImdyYXZpdHlfaG9yaXpvbnRhbCI6ICJsZWZ0IgogICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgICAgIF0KICAgICAgICAgICAgICAgIH0KICAgIGZpZWxkX2VsZW1lbnRzLmFwcGVuZChsaW5lKQogICAgCiAgICBsaW5lID0gewogICAgICAgICAgICAgICAgInR5cGUiOiAiTGluZWFyTGF5b3V0IiwKICAgICAgICAgICAgICAgICJvcmllbnRhdGlvbiI6ICJob3Jpem9udGFsIiwKICAgICAgICAgICAgICAgICJoZWlnaHQiOiAid3JhcF9jb250ZW50IiwKICAgICAgICAgICAgICAgICJ3aWR0aCI6ICJtYXRjaF9wYXJlbnQiLAogICAgICAgICAgICAgICAgIndlaWdodCI6ICIxIiwKICAgICAgICAgICAgICAgICJFbGVtZW50cyI6IFsKICAgICAgICAgICAgICAgewoKICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJUZXh0VmlldyIsCiAgICAgICAgICAgICAgICAgICAgInNob3dfYnlfY29uZGl0aW9uIjogIiIsCiAgICAgICAgICAgICAgICAgICAgIlZhbHVlIjogItCh0YLQsNGC0YPRgdGLOiAiLAogICAgICAgICAgICAgICAgICAgICJoZWlnaHQiOiAid3JhcF9jb250ZW50IiwKICAgICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjMiLAogICAgICAgICAgICAgICAgICAgICJncmF2aXR5X2hvcml6b250YWwiOiAibGVmdCIKICAgICAgICAgICAgICAgIH0sCgkJCQl7CgkJCQkJInR5cGUiOiAiTGluZWFyTGF5b3V0IiwKICAgICAgICAgICAgICAgICAgICAib3JpZW50YXRpb24iOiAiaG9yaXpvbnRhbCIsCiAgICAgICAgICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAgICAgICAgICJ3aWR0aCI6ICJtYXRjaF9wYXJlbnQiLAogICAgICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAgICAgICAgICAgIkVsZW1lbnRzIjogWwogICAgICAgICAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAiVGV4dFZpZXciLAogICAgICAgICAgICAgICAgICAgICAgICAic2hvd19ieV9jb25kaXRpb24iOiAiIiwKICAgICAgICAgICAgICAgICAgICAgICAgIlZhbHVlIjogIiEhISIsCiAgICAgICAgICAgICAgICAgICAgICAgICJoZWlnaHQiOiAid3JhcF9jb250ZW50IiwKICAgICAgICAgICAgICAgICAgICAgICAgIndpZHRoIjogIm1hdGNoX3BhcmVudCIsCiAgICAgICAgICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMyIsCiAgICAgICAgICAgICAgICAgICAgICAgICJUZXh0Qm9sZCI6IFRydWUsCgkJCQkJICAgICJUZXh0Q29sb3IiOiAiI0U4RjVFOSIsCiAgICAgICAgICAgICAgICAgICAgICAgICJCYWNrZ3JvdW5kQ29sb3IiOiAiI0Q4MUI2MCIsCiAgICAgICAgICAgICAgICAgICAgICAgICJncmF2aXR5X2hvcml6b250YWwiOiAiY2VudGVyIgogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgewoKICAgICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAiVGV4dFZpZXciLAogICAgICAgICAgICAgICAgICAgICAgICAic2hvd19ieV9jb25kaXRpb24iOiAiIiwKICAgICAgICAgICAgICAgICAgICAgICAgIlZhbHVlIjogIkBzdGF0dXMiLAogICAgICAgICAgICAgICAgICAgICAgICAiaGVpZ2h0IjogIndyYXBfY29udGVudCIsCiAgICAgICAgICAgICAgICAgICAgICAgICJ3aWR0aCI6ICJtYXRjaF9wYXJlbnQiLAogICAgICAgICAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjEiLAogICAgICAgICAgICAgICAgICAgICAgICAiVGV4dEJvbGQiOiBUcnVlLAoJCQkJCSAgICAiVGV4dENvbG9yIjogIiNFOEY1RTkiLAogICAgICAgICAgICAgICAgICAgICAgICAiQmFja2dyb3VuZENvbG9yIjogIiM0YjgzMGQiLAogICAgICAgICAgICAgICAgICAgICAgICAiZ3Jhdml0eV9ob3Jpem9udGFsIjogImxlZnQiCiAgICAgICAgICAgICAgICAgICAgfV0KCQkJCX0KICAgICAgICAgICAgXQogICAgfQogICAgCiAgICAKICAgIGZpZWxkX2VsZW1lbnRzLmFwcGVuZChsaW5lKQogICAgalsiY3VzdG9tY2FyZHMiXVsibGF5b3V0Il1bIkVsZW1lbnRzIl0gPSBmaWVsZF9lbGVtZW50cwogICAgalsiY3VzdG9tY2FyZHMiXVsiY2FyZHNkYXRhIl09W10KICAgIAogICAgYyA9ICB7CiAgICAgICAgICAia2V5IjogIjAiLAogICAgICAgICAgIm9yZGVyX29wZW4iOiAi0KLRgNGD0LHQvtC70LjRgtC10LnQvdGL0Lkg0YbQtdGFIiwKCQkgICJzdW0iOiAiMTAwMDAwLjAwIiwKICAgICAgICAgICJzdGF0dXMiOiAiIOKchSDQlNC40YDQtdC60YLQvtGAIgogICAgICB9CiAgICBqWyJjdXN0b21jYXJkcyJdWyJjYXJkc2RhdGEiXS5hcHBlbmQoYykgIAogICAgYyA9ICB7CiAgICAgICAgICAia2V5IjogIjEiLAogICAgICAgICAgIm9yZGVyX29wZW4iOiAi0KbQtdGFINC/0L4g0YDQtdC80L7QvdGC0YMg0L7QsdC+0YDRg9C00L7QstCw0L3QuNGPINC4INC+0YHQvdCw0YHRgtC60LgiLAoJCSAgInN1bSI6ICIxMDAwMDAwLjAwIiwKICAgICAgICAgICJzdGF0dXMiOiAiIOKchSDQndCw0YfQsNC70YzQvdC40LoiCiAgICAgIH0KICAgIGpbImN1c3RvbWNhcmRzIl1bImNhcmRzZGF0YSJdLmFwcGVuZChjKQogICAgaGFzaE1hcC5wdXQoImNhcmRzIixqc29uLmR1bXBzKGosZW5zdXJlX2FzY2lpPUZhbHNlKSkKICAgIAogICAgCiAgICBoYXNoTWFwLnB1dCgiUmVmcmVzaFNjcmVlbiIsIiIpCiAgICBwcmludCgib25TdGFydCAtIGZpbmlzaDIiKQogICAgcmV0dXJuIGhhc2hNYXAKCiAgICAKICAgIApkZWYgc2V0X2NsYXNzX2xpc3QoaGFzaE1hcCwqYXJncyk6CiAgICBoYXNoTWFwLnB1dCgicmV0dXJuX3NlbGVjdGVkX2RhdGEiLCIiKQogICAgCiAgICBjbGFzc25hbWUgPSBhcmdzWzBdCgogICAgc2VhcmNoc3RyaW5nPU5vbmUKICAgIAogICAgaWYgbGVuKGFyZ3MpPjI6CiAgICAgICBhcmcgPSBhcmdzWzJdCiAgICAgICBpZiBhcmc9PSJzZWFyY2giOgogICAgICAgICAgc2VhcmNoc3RyaW5nPXN0cihoYXNoTWFwLmdldCgiU2VhcmNoU3RyaW5nIikpCiAgICAgICAgCgogICAgamNsYXNzID0ganNvbi5sb2FkcyhzdUNsYXNzLmdldENsYXNzQnlOYW1lKGNsYXNzbmFtZSkpCiAgICAKICAgIGogPSB7ICJjdXN0b21jYXJkcyI6ICAgICAgICAgewogICAgICAgICAgICAib3B0aW9ucyI6ewogICAgICAgICAgICAgICJzZWFyY2hfZW5hYmxlZCI6VHJ1ZSwKICAgICAgICAgICAgICAic2F2ZV9wb3NpdGlvbiI6VHJ1ZSwKICAgICAgICAgICAgICAib3ZlcnJpZGVfc2VhcmNoIjpUcnVlCgogICAgICAgICAgICB9LAogICAgICAgICAgICAibGF5b3V0IjogewogICAgICAgICAgICAgICAgInR5cGUiOiAiTGluZWFyTGF5b3V0IiwKICAgICAgICAgICAgICAgICJvcmllbnRhdGlvbiI6ICJ2ZXJ0aWNhbCIsCiAgICAgICAgICAgICAgICAiaGVpZ2h0IjogIndyYXBfY29udGVudCIsCiAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAgICAgICAiRWxlbWVudHMiOiBbIF0KICAgICAgICAgICAgICAgIH0KCiAgICB9CiAgICB9CiAgICAKICAgIAoKICAgIGZpZWxkX2VsZW1lbnRzPVtdCiAgICBpbmRleGVkID0gRmFsc2UKICAgIGZvciBya2V5LCB2YWx1ZSBpbiBqY2xhc3MuaXRlbXMoKToKICAgICAgICBpZiBya2V5PT0iX2lkIjoKICAgICAgICAgICAgY29udGludWUKICAgICAgICBpZiBya2V5PT0iX2luZGV4IjoKICAgICAgICAgICAgaW5kZXhlZCA9IFRydWUKICAgICAgICAgICAgY29udGludWUKICAgICAgICAgIAogICAgICAgIGlmIHJrZXlbMF09PSJfIjoKICAgICAgICAgICAgY29udGludWUKICAgICAgICAKICAgICAgICBpZiB2YWx1ZVswXT09Il8iOgogICAgICAgICAgICBjb250aW51ZQogICAgICAgIAogICAgICAgIGlmICIoIiBpbiBya2V5IGFuZCAiKSIgaW4gcmtleToKICAgICAgICAgICAgdGl0bGUgPSBya2V5W3JrZXkuZmluZCgiKCIpKzE6cmtleS5maW5kKCIpIildCiAgICAgICAgICAgIGtleSA9IHJrZXkucGFydGl0aW9uKCcoJylbMF0gICAKICAgICAgICBlbHNlOgogICAgICAgICAgICAgdGl0bGUgPSBya2V5CiAgICAgICAgICAgICBrZXkgPSBya2V5IAoKCiAgICAgICAgaWYgaXNpbnN0YW5jZSh2YWx1ZSwgbGlzdCk6ICAgICAKICAgICAgICAgICAgY29udGludWUgIAogICAgICAgIAogICAgICAgIAoKICAgICAgICBpZiBsZW4odGl0bGUpPjA6ICAgICAgCiAgICAgICAgICBsaW5lID0gICAgIHsKICAgICAgICAgICAgICAgICJ0eXBlIjogIkxpbmVhckxheW91dCIsCiAgICAgICAgICAgICAgICAib3JpZW50YXRpb24iOiAiaG9yaXpvbnRhbCIsCiAgICAgICAgICAgICAgICAiaGVpZ2h0IjogIndyYXBfY29udGVudCIsCiAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAgICAgICAiRWxlbWVudHMiOiBbCiAgICAgICAgICAgICAgIHsKCiAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAiVGV4dFZpZXciLAogICAgICAgICAgICAgICAgICAgICJzaG93X2J5X2NvbmRpdGlvbiI6ICIiLAogICAgICAgICAgICAgICAgICAgICJWYWx1ZSI6IHRpdGxlKyIgOiAiLAogICAgICAgICAgICAgICAgICAgICJoZWlnaHQiOiAid3JhcF9jb250ZW50IiwKICAgICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjIiLAogICAgICAgICAgICAgICAgICAgICJncmF2aXR5X2hvcml6b250YWwiOiAibGVmdCIKCiAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICB7CgogICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIlRleHRWaWV3IiwKICAgICAgICAgICAgICAgICAgICAic2hvd19ieV9jb25kaXRpb24iOiAiIiwKICAgICAgICAgICAgICAgICAgICAiVmFsdWUiOiAiQCIra2V5LAogICAgICAgICAgICAgICAgICAgICJoZWlnaHQiOiAid3JhcF9jb250ZW50IiwKICAgICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjEiLAogICAgICAgICAgICAgICAgICAgICJUZXh0Qm9sZCI6IFRydWUsCiAgICAgICAgICAgICAgICAgICAgImdyYXZpdHlfaG9yaXpvbnRhbCI6ICJsZWZ0IgogICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgICAgIF0KICAgICAgICAgICAgICAgIH0KICAgICAgICAgIGZpZWxkX2VsZW1lbnRzLmFwcGVuZChsaW5lKQogICAgICAgIGVsc2U6CiAgICAgICAgICBsaW5lID0gIHsKCiAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAiVGV4dFZpZXciLAogICAgICAgICAgICAgICAgICAgICJzaG93X2J5X2NvbmRpdGlvbiI6ICIiLAogICAgICAgICAgICAgICAgICAgICJWYWx1ZSI6ICJAIitrZXksCiAgICAgICAgICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAgICAgICAgICJ3aWR0aCI6ICJtYXRjaF9wYXJlbnQiLAogICAgICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAgICAgICAgICAgIlRleHRCb2xkIjogVHJ1ZSwKICAgICAgICAgICAgICAgICAgICAiZ3Jhdml0eV9ob3Jpem9udGFsIjogImxlZnQiCiAgICAgICAgICAgICAgICB9CgogICAgICAgICAgZmllbGRfZWxlbWVudHMuYXBwZW5kKGxpbmUpICAgIAogICAKICAgIGpbImN1c3RvbWNhcmRzIl1bImxheW91dCJdWyJFbGVtZW50cyJdID0gZmllbGRfZWxlbWVudHMKCiAgICBqWyJjdXN0b21jYXJkcyJdWyJjYXJkc2RhdGEiXT1bXQogICAgaWYgaW5kZXhlZDoKICAgICAgICBkYltjbGFzc25hbWVdLnJlZ2lzdGVyX3RleHRfaW5kZXgoY2xhc3NuYW1lICsgIl90ZXh0X2luZGV4IiwgIl9pbmRleCIsIGR5bmFtaWMgPSBUcnVlKQogICAgICAgIGRiW2NsYXNzbmFtZV0ucmVpbmRleF90ZXh0KGNsYXNzbmFtZSArICJfdGV4dF9pbmRleCIpICAgICAKICAgIGNvbGxlY3Rpb24gPSBkYltjbGFzc25hbWVdCgogICAgaWYgc2VhcmNoc3RyaW5nPT1Ob25lOgogICAgIHJlc3VsdCA9IGNvbGxlY3Rpb24uYWxsKCkKICAgICAKICAgIGVsc2U6CiAgICAgCiAgICAjICBzbGlzdCA9IFtdIAoKICAgICMgIGZvciBya2V5LCB2YWx1ZSBpbiBqY2xhc3MuaXRlbXMoKToKICAgICMgICAgIGlmIHJrZXk9PSJfaWQiOgogICAgIyAgICAgICAgICBjb250aW51ZQogICAgIyAgICAgaWYgcmtleVswXT09Il8iIDoKICAgICMgICAgICAgICAgY29udGludWUKICAgICAgICAKICAgICMgICAgIGlmIGlzaW5zdGFuY2UodmFsdWUsIGxpc3QpOiAgICAgCiAgICAjICAgICAgICBjb250aW51ZQogICAgICAgIAogICAgIyAgICAgaWYgIigiIGluIHJrZXkgYW5kICIpIiBpbiBya2V5OgogICAgIyAgICAgICAgIHRpdGxlID0gcmtleVtya2V5LmZpbmQoIigiKSsxOnJrZXkuZmluZCgiKSIpXQogICAgIyAgICAgICAgIGtleSA9IHJrZXkucGFydGl0aW9uKCcoJylbMF0gICAKICAgICMgICAgIGVsc2U6CiAgICAjICAgICAgICAgIHRpdGxlID0gcmtleQogICAgIyAgICAgICAgICBrZXkgPSBya2V5IAoKICAgICMgICAgIGlmICIqIiBpbiB2YWx1ZToKICAgICMgICAgICAgIHNsaXN0LmFwcGVuZCh7a2V5OnsnJHJlZ2V4Jzogc2VhcmNoc3RyaW5nfX0pICAgICAKCgogICAgICNyZXN1bHQgPSBjb2xsZWN0aW9uLmZpbmQoeyAiJG5hbWVfMV9kZXNjcmlwdGlvbl8xIjogeyAiJHNlYXJjaCI6IHNlYXJjaHN0cmluZyB9IH0pICAKICAgICAgcmVzdWx0ID0gZGJbY2xhc3NuYW1lICsgIl90ZXh0X2luZGV4Il0uc2VhcmNoX3RleHRfaW5kZXgoc2VhcmNoc3RyaW5nLmxvd2VyKCkpIAogICAgIAoKICAgIGZvciBpdGVtIGluIHJlc3VsdDoKICAgICAgYyA9ICB7CiAgICAgICAgICAia2V5Ijogc3RyKGl0ZW0uZ2V0KCJfaWQiKSkKICAgICAgfQoKICAgICAgZm9yIHJrZXksIHZhbHVlIGluIGpjbGFzcy5pdGVtcygpOgogICAgICAgICNpZiBya2V5PT0iX2lkIjoKICAgICAgICAjICAgICBjb250aW51ZQogICAgICAgIGlmIHJrZXlbMF09PSJfIiBhbmQgcmtleSE9Il9pZCI6CiAgICAgICAgICAgICBjb250aW51ZQogICAgICAgIAogICAgICAgIGlmICIoIiBpbiBya2V5IGFuZCAiKSIgaW4gcmtleToKICAgICAgICAgICAgdGl0bGUgPSBya2V5W3JrZXkuZmluZCgiKCIpKzE6cmtleS5maW5kKCIpIildCiAgICAgICAgICAgIGtleSA9IHJrZXkucGFydGl0aW9uKCcoJylbMF0gICAKICAgICAgICBlbHNlOgogICAgICAgICAgICAgdGl0bGUgPSBya2V5CiAgICAgICAgICAgICBrZXkgPSBya2V5IAoKICAgICAgICBpZiBrZXkgaW4gaXRlbTogICAgICAgICAgICAgICAKICAgICAgICAgIGNba2V5XT1zdHIoaXRlbS5nZXQoa2V5LCIiKSkKICAgICAgCiAgICAgIGpbImN1c3RvbWNhcmRzIl1bImNhcmRzZGF0YSJdLmFwcGVuZChjKQoKICAgIGhhc2hNYXAucHV0KCJjYXJkcyIsanNvbi5kdW1wcyhqLGVuc3VyZV9hc2NpaT1GYWxzZSkpCiAgICAKICAgIAogICAgaGFzaE1hcC5wdXQoIlJlZnJlc2hTY3JlZW4iLCIiKQoKICAgIHJldHVybiBoYXNoTWFwCgoKZGVmIHNldF9jb250YWluZXJfbGlzdChoYXNoTWFwLCphcmdzKToKICAgIGhhc2hNYXAucHV0KCJyZXR1cm5fc2VsZWN0ZWRfZGF0YSIsIiIpCiAgICAKICAgCgogICAgaWYgaGFzaE1hcC5jb250YWluc0tleSgiY2xvc2luZyIpOgogICAgICAgaGFzaE1hcC5wdXQoImNsb3NpbmciLCIiKQogICAgZWxzZToKCiAgICAgIGNsYXNzbmFtZSA9IGFyZ3NbMF0KICAgICAgcHJvcGVydHkgPSBhcmdzWzFdCgogICAgICBoYXNoTWFwLnB1dCgibmVzdGVkX3Byb3BlcnR5IixzdHIocHJvcGVydHkpKQoKICAgIAoKICAgICAgamNsYXNzID0ganNvbi5sb2FkcyhzdUNsYXNzLmdldENsYXNzQnlOYW1lKGNsYXNzbmFtZSkpCgogICAgICAKICAgICAgCiAgICAgIGogPSB7ICJjdXN0b21jYXJkcyI6ICAgICAgICAgewogICAgICAgICAgICAgICJvcHRpb25zIjp7CiAgICAgICAgICAgICAgICAic2VhcmNoX2VuYWJsZWQiOlRydWUsCiAgICAgICAgICAgICAgICAic2F2ZV9wb3NpdGlvbiI6VHJ1ZQogICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgImxheW91dCI6IHsKICAgICAgICAgICAgICAgICAgInR5cGUiOiAiTGluZWFyTGF5b3V0IiwKICAgICAgICAgICAgICAgICAgIm9yaWVudGF0aW9uIjogInZlcnRpY2FsIiwKICAgICAgICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgIndlaWdodCI6ICIxIiwKICAgICAgICAgICAgICAgICAgIkVsZW1lbnRzIjogWyBdCiAgICAgICAgICAgICAgICAgIH0KCiAgICAgIH0KICAgICAgfQoKICAgICAgZmllbGRfZWxlbWVudHM9W10KCiAgICAgIGZvciBya2V5LCB2YWx1ZSBpbiBqY2xhc3MuaXRlbXMoKToKICAgICAgICAgIGlmIHJrZXk9PSJfaWQiOgogICAgICAgICAgICAgIGNvbnRpbnVlCiAgICAgICAgICBpZiBya2V5WzBdPT0iXyI6CiAgICAgICAgICAgICAgY29udGludWUKICAgICAgICAgIAogICAgICAgICAgaWYgIigiIGluIHJrZXkgYW5kICIpIiBpbiBya2V5OgogICAgICAgICAgICAgIHRpdGxlID0gcmtleVtya2V5LmZpbmQoIigiKSsxOnJrZXkuZmluZCgiKSIpXQogICAgICAgICAgICAgIGtleSA9IHJrZXkucGFydGl0aW9uKCcoJylbMF0gICAKICAgICAgICAgIGVsc2U6CiAgICAgICAgICAgICAgdGl0bGUgPSBya2V5CiAgICAgICAgICAgICAga2V5ID0gcmtleSAKCiAgICAgICAgICBpZiBpc2luc3RhbmNlKHZhbHVlLCBsaXN0KTogICAgIAogICAgICAgICAgICBjb250aW51ZQoKICAgICAgICAgIGlmIGxlbih0aXRsZSk+MDogICAgICAKICAgICAgICAgICAgbGluZSA9ICAgICB7CiAgICAgICAgICAgICAgICAgICJ0eXBlIjogIkxpbmVhckxheW91dCIsCiAgICAgICAgICAgICAgICAgICJvcmllbnRhdGlvbiI6ICJob3Jpem9udGFsIiwKICAgICAgICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgIndlaWdodCI6ICIxIiwKICAgICAgICAgICAgICAgICAgIkVsZW1lbnRzIjogWwogICAgICAgICAgICAgICAgewoKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIlRleHRWaWV3IiwKICAgICAgICAgICAgICAgICAgICAgICJzaG93X2J5X2NvbmRpdGlvbiI6ICIiLAogICAgICAgICAgICAgICAgICAgICAgIlZhbHVlIjogdGl0bGUrIiA6ICIsCiAgICAgICAgICAgICAgICAgICAgICAiaGVpZ2h0IjogIndyYXBfY29udGVudCIsCiAgICAgICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMiIsCiAgICAgICAgICAgICAgICAgICAgICAiZ3Jhdml0eV9ob3Jpem9udGFsIjogImxlZnQiCgogICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgIHsKCiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJUZXh0VmlldyIsCiAgICAgICAgICAgICAgICAgICAgICAic2hvd19ieV9jb25kaXRpb24iOiAiIiwKICAgICAgICAgICAgICAgICAgICAgICJWYWx1ZSI6ICJAIitrZXksCiAgICAgICAgICAgICAgICAgICAgICAiaGVpZ2h0IjogIndyYXBfY29udGVudCIsCiAgICAgICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAgICAgICAgICAgICAiVGV4dEJvbGQiOiBUcnVlLAogICAgICAgICAgICAgICAgICAgICAgImdyYXZpdHlfaG9yaXpvbnRhbCI6ICJsZWZ0IgogICAgICAgICAgICAgICAgICB9CgogICAgICAgICAgICAgICAgICBdCiAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgZmllbGRfZWxlbWVudHMuYXBwZW5kKGxpbmUpCiAgICAgICAgICBlbHNlOgogICAgICAgICAgICBsaW5lID0gIHsKCiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJUZXh0VmlldyIsCiAgICAgICAgICAgICAgICAgICAgICAic2hvd19ieV9jb25kaXRpb24iOiAiIiwKICAgICAgICAgICAgICAgICAgICAgICJWYWx1ZSI6ICJAIitrZXksCiAgICAgICAgICAgICAgICAgICAgICAiaGVpZ2h0IjogIndyYXBfY29udGVudCIsCiAgICAgICAgICAgICAgICAgICAgICAid2lkdGgiOiAibWF0Y2hfcGFyZW50IiwKICAgICAgICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAgICAgICAgICAgICAiVGV4dEJvbGQiOiBUcnVlLAogICAgICAgICAgICAgICAgICAgICAgImdyYXZpdHlfaG9yaXpvbnRhbCI6ICJsZWZ0IgogICAgICAgICAgICAgICAgICB9CgogICAgICAgICAgICBmaWVsZF9lbGVtZW50cy5hcHBlbmQobGluZSkgICAgCiAgICAKICAgICAgalsiY3VzdG9tY2FyZHMiXVsibGF5b3V0Il1bIkVsZW1lbnRzIl0gPSBmaWVsZF9lbGVtZW50cwoKICAgICAgalsiY3VzdG9tY2FyZHMiXVsiY2FyZHNkYXRhIl09W10KCiAgICAgICNqb2JqZWN0ID1qc29uLmxvYWRzKGhhc2hNYXAuZ2V0KCJvYmplY3QiKSkKCiAgICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoIm9iamVjdF8iK3N0cihoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKSk6CgogICAgICAgIGpvYmplY3QgPSBqc29uLmxvYWRzKGhhc2hNYXAuZ2V0KCJvYmplY3RfIitzdHIoaGFzaE1hcC5nZXQoImN1cnJlbnRfc2NyZWVuX25hbWUiKSkpKQoKCiAgICAgICAgCiAgICAgICAgaWYgcHJvcGVydHkgaW4gam9iamVjdDoKICAgICAgICAKICAgICAgICAgIHJlc3VsdCA9IGpvYmplY3QuZ2V0KHByb3BlcnR5KQogICAgICAgICAgCgogICAgICAgICAgZm9yIGl0ZW0gaW4gcmVzdWx0OgogICAgICAgICAgICBjID0gIHsKICAgICAgICAgICAgICAgICJrZXkiOiBzdHIoaXRlbS5nZXQoIl9pZCIpKQogICAgICAgICAgICB9CgogICAgICAgICAgICBmb3IgcmtleSwgdmFsdWUgaW4gamNsYXNzLml0ZW1zKCk6CiAgICAgICAgICAgICAgaWYga2V5PT0iX2lkIjoKICAgICAgICAgICAgICAgICAgY29udGludWUKICAgICAgICAgICAgICBpZiBya2V5WzBdPT0iXyI6CiAgICAgICAgICAgICAgICAgIGNvbnRpbnVlCiAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgaWYgaXNpbnN0YW5jZSh2YWx1ZSwgbGlzdCk6ICAgICAKICAgICAgICAgICAgICAgICAgY29udGludWUKCiAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgaWYgIigiIGluIHJrZXkgYW5kICIpIiBpbiBya2V5OgogICAgICAgICAgICAgICAgICB0aXRsZSA9IHJrZXlbcmtleS5maW5kKCIoIikrMTpya2V5LmZpbmQoIikiKV0KICAgICAgICAgICAgICAgICAga2V5ID0gcmtleS5wYXJ0aXRpb24oJygnKVswXSAgIAogICAgICAgICAgICAgIGVsc2U6CiAgICAgICAgICAgICAgICAgIHRpdGxlID0gcmtleQogICAgICAgICAgICAgICAgICBrZXkgPSBya2V5IAoKICAgICAgICAgICAgICBpZiBrZXkgaW4gaXRlbTogICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIGNba2V5XT1zdHIoaXRlbS5nZXQoa2V5LCIiKSkKICAgICAgICAgICAgCiAgICAgICAgICAgIGpbImN1c3RvbWNhcmRzIl1bImNhcmRzZGF0YSJdLmFwcGVuZChjKQoKICAgICAgI2lmIG5vdCBoYXNoTWFwLmNvbnRhaW5zS2V5KCJjYXJkcyIpOgogICAgICAKICAgICAgaGFzaE1hcC5wdXQoImNhcmRzIixqc29uLmR1bXBzKGosZW5zdXJlX2FzY2lpPUZhbHNlKSkKICAgICAgCiAgICAgIGhhc2hNYXAucHV0KCJSZWZyZXNoU2NyZWVuIiwiIikKCiAgICByZXR1cm4gaGFzaE1hcAoKCmRlZiBzZXRfY29udGFpbmVyX2xpc3RfcmVmKGhhc2hNYXAsKmFyZ3MpOgogICAgCiAgICBpZiBoYXNoTWFwLmNvbnRhaW5zS2V5KCJ1cGRhdGVfbmVzdGVkX3Byb3BlcnR5Iik6CiAgICAgICAgY2xhc3NuYW1lID0gaGFzaE1hcC5nZXQoInVwZGF0ZV9uZXN0ZWRfcHJvcGVydHkiKQogICAgICAgIGhhc2hNYXAucmVtb3ZlKCJ1cGRhdGVfbmVzdGVkX3Byb3BlcnR5IikKCiAgICAgICAgamN1cnJlbnRfb2JqZWN0ID0ganNvbi5sb2FkcyhoYXNoTWFwLmdldCgib2JqZWN0XyIrc3RyKGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIikpKSkKICAgICAgICBqc2VsZWN0ZWRfb2JqZWN0PWpzb24ubG9hZHMoaGFzaE1hcC5nZXQoInNlbGVjdGVkX2NhcmRfZGF0YSIpKQoKICAgICAgICBpZiBub3QgaGFzaE1hcC5nZXQoIm5lc3RlZF9wcm9wZXJ0eSIpIGluIGpjdXJyZW50X29iamVjdDoKICAgICAgICAgIGpjdXJyZW50X29iamVjdFtoYXNoTWFwLmdldCgibmVzdGVkX3Byb3BlcnR5IildPVtdCgogICAgICAgIGpjdXJyZW50X29iamVjdFtoYXNoTWFwLmdldCgibmVzdGVkX3Byb3BlcnR5IildLmFwcGVuZChqc2VsZWN0ZWRfb2JqZWN0LmdldCgiX2lkIikpCgogICAgICAgIAogICAgICAgIGNvbGxlY3Rpb24gPSBkYltjbGFzc25hbWVdCiAgICAgICAgcG9zdF9pZCA9IGNvbGxlY3Rpb24uaW5zZXJ0KGpjdXJyZW50X29iamVjdCx1cHNlcnQ9VHJ1ZSkKICAgICAgICBqY3VycmVudF9vYmplY3RbIl9pZCJdPXN0cihwb3N0X2lkKQogICAgICAgIAoKICAgICAgICBoYXNoTWFwLnB1dCgib2JqZWN0XyIrc3RyKGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIikpLGpzb24uZHVtcHMoamN1cnJlbnRfb2JqZWN0LGVuc3VyZV9hc2NpaT1GYWxzZSkpCiAgICAKICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoImNsb3NpbmciKToKICAgICAgIGhhc2hNYXAucHV0KCJjbG9zaW5nIiwiIikKICAgIGVsc2U6CgogICAgICBjbGFzc25hbWUgPSBhcmdzWzBdCiAgICAgIHByb3BlcnR5ID0gYXJnc1sxXQoKICAgICAgaGFzaE1hcC5wdXQoIm5lc3RlZF9wcm9wZXJ0eSIsc3RyKHByb3BlcnR5KSkKCiAgICAKCiAgICAgIGpjbGFzcyA9IGpzb24ubG9hZHMoc3VDbGFzcy5nZXRDbGFzc0J5TmFtZShjbGFzc25hbWUpKQoKICAgICAgCiAgICAgIAogICAgICBqID0geyAiY3VzdG9tY2FyZHMiOiAgICAgICAgIHsKICAgICAgICAgICAgICAib3B0aW9ucyI6ewogICAgICAgICAgICAgICAgInNlYXJjaF9lbmFibGVkIjpUcnVlLAogICAgICAgICAgICAgICAgInNhdmVfcG9zaXRpb24iOlRydWUKICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICJsYXlvdXQiOiB7CiAgICAgICAgICAgICAgICAgICJ0eXBlIjogIkxpbmVhckxheW91dCIsCiAgICAgICAgICAgICAgICAgICJvcmllbnRhdGlvbiI6ICJ2ZXJ0aWNhbCIsCiAgICAgICAgICAgICAgICAgICJoZWlnaHQiOiAid3JhcF9jb250ZW50IiwKICAgICAgICAgICAgICAgICAgIndpZHRoIjogIm1hdGNoX3BhcmVudCIsCiAgICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAgICAgICAgICJFbGVtZW50cyI6IFsgXQogICAgICAgICAgICAgICAgICB9CgogICAgICB9CiAgICAgIH0KCiAgICAgIGZpZWxkX2VsZW1lbnRzPVtdCgogICAgICBmb3IgcmtleSwgdmFsdWUgaW4gamNsYXNzLml0ZW1zKCk6CiAgICAgICAgICBpZiBya2V5PT0iX2lkIjoKICAgICAgICAgICAgICBjb250aW51ZQogICAgICAgICAgaWYgcmtleVswXT09Il8iOgogICAgICAgICAgICAgIGNvbnRpbnVlCiAgICAgICAgICAKICAgICAgICAgIGlmICIoIiBpbiBya2V5IGFuZCAiKSIgaW4gcmtleToKICAgICAgICAgICAgICB0aXRsZSA9IHJrZXlbcmtleS5maW5kKCIoIikrMTpya2V5LmZpbmQoIikiKV0KICAgICAgICAgICAgICBrZXkgPSBya2V5LnBhcnRpdGlvbignKCcpWzBdICAgCiAgICAgICAgICBlbHNlOgogICAgICAgICAgICAgIHRpdGxlID0gcmtleQogICAgICAgICAgICAgIGtleSA9IHJrZXkgCgogICAgICAgICAgaWYgaXNpbnN0YW5jZSh2YWx1ZSwgbGlzdCk6ICAgICAKICAgICAgICAgICAgY29udGludWUKCiAgICAgICAgICBpZiBsZW4odGl0bGUpPjA6ICAgICAgCiAgICAgICAgICAgIGxpbmUgPSAgICAgewogICAgICAgICAgICAgICAgICAidHlwZSI6ICJMaW5lYXJMYXlvdXQiLAogICAgICAgICAgICAgICAgICAib3JpZW50YXRpb24iOiAiaG9yaXpvbnRhbCIsCiAgICAgICAgICAgICAgICAgICJoZWlnaHQiOiAid3JhcF9jb250ZW50IiwKICAgICAgICAgICAgICAgICAgIndpZHRoIjogIm1hdGNoX3BhcmVudCIsCiAgICAgICAgICAgICAgICAgICJ3ZWlnaHQiOiAiMSIsCiAgICAgICAgICAgICAgICAgICJFbGVtZW50cyI6IFsKICAgICAgICAgICAgICAgIHsKCiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJUZXh0VmlldyIsCiAgICAgICAgICAgICAgICAgICAgICAic2hvd19ieV9jb25kaXRpb24iOiAiIiwKICAgICAgICAgICAgICAgICAgICAgICJWYWx1ZSI6IHRpdGxlKyIgOiAiLAogICAgICAgICAgICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAgICAgICAgICAgIndpZHRoIjogIm1hdGNoX3BhcmVudCIsCiAgICAgICAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjIiLAogICAgICAgICAgICAgICAgICAgICAgImdyYXZpdHlfaG9yaXpvbnRhbCI6ICJsZWZ0IgoKICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICB7CgogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAiVGV4dFZpZXciLAogICAgICAgICAgICAgICAgICAgICAgInNob3dfYnlfY29uZGl0aW9uIjogIiIsCiAgICAgICAgICAgICAgICAgICAgICAiVmFsdWUiOiAiQCIra2V5LAogICAgICAgICAgICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAgICAgICAgICAgIndpZHRoIjogIm1hdGNoX3BhcmVudCIsCiAgICAgICAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjEiLAogICAgICAgICAgICAgICAgICAgICAgIlRleHRCb2xkIjogVHJ1ZSwKICAgICAgICAgICAgICAgICAgICAgICJncmF2aXR5X2hvcml6b250YWwiOiAibGVmdCIKICAgICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgICAgICAgXQogICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIGZpZWxkX2VsZW1lbnRzLmFwcGVuZChsaW5lKQogICAgICAgICAgZWxzZToKICAgICAgICAgICAgbGluZSA9ICB7CgogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAiVGV4dFZpZXciLAogICAgICAgICAgICAgICAgICAgICAgInNob3dfYnlfY29uZGl0aW9uIjogIiIsCiAgICAgICAgICAgICAgICAgICAgICAiVmFsdWUiOiAiQCIra2V5LAogICAgICAgICAgICAgICAgICAgICAgImhlaWdodCI6ICJ3cmFwX2NvbnRlbnQiLAogICAgICAgICAgICAgICAgICAgICAgIndpZHRoIjogIm1hdGNoX3BhcmVudCIsCiAgICAgICAgICAgICAgICAgICAgICAid2VpZ2h0IjogIjEiLAogICAgICAgICAgICAgICAgICAgICAgIlRleHRCb2xkIjogVHJ1ZSwKICAgICAgICAgICAgICAgICAgICAgICJncmF2aXR5X2hvcml6b250YWwiOiAibGVmdCIKICAgICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgZmllbGRfZWxlbWVudHMuYXBwZW5kKGxpbmUpICAgIAogICAgCiAgICAgIGpbImN1c3RvbWNhcmRzIl1bImxheW91dCJdWyJFbGVtZW50cyJdID0gZmllbGRfZWxlbWVudHMKCiAgICAgIGpbImN1c3RvbWNhcmRzIl1bImNhcmRzZGF0YSJdPVtdCgogICAgICAjam9iamVjdCA9anNvbi5sb2FkcyhoYXNoTWFwLmdldCgib2JqZWN0IikpCgogICAgICBpZiBoYXNoTWFwLmNvbnRhaW5zS2V5KCJvYmplY3RfIitzdHIoaGFzaE1hcC5nZXQoImN1cnJlbnRfc2NyZWVuX25hbWUiKSkpOgoKICAgICAgICBqb2JqZWN0ID0ganNvbi5sb2FkcyhoYXNoTWFwLmdldCgib2JqZWN0XyIrc3RyKGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIikpKSkKCiAgICAgICAgY29sbGVjdGlvbiA9IGRiW2NsYXNzbmFtZV0KCiAgICAgCiAgICAgICAgaWYgcHJvcGVydHkgaW4gam9iamVjdDoKICAgICAgICAKICAgICAgICAgIHJlc3VsdCA9IGNvbGxlY3Rpb24uZmluZCh7Il9pZCI6eyIkaW4iOmpvYmplY3RbcHJvcGVydHldfX0pCiAgICAgICAgICAKCiAgICAgICAgICBmb3IgaXRlbSBpbiByZXN1bHQ6CiAgICAgICAgICAgIGMgPSAgewogICAgICAgICAgICAgICAgImtleSI6IHN0cihpdGVtLmdldCgiX2lkIikpCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGZvciBya2V5LCB2YWx1ZSBpbiBqY2xhc3MuaXRlbXMoKToKICAgICAgICAgICAgICBpZiBrZXk9PSJfaWQiOgogICAgICAgICAgICAgICAgICBjb250aW51ZQogICAgICAgICAgICAgIGlmIHJrZXlbMF09PSJfIjoKICAgICAgICAgICAgICAgICAgY29udGludWUKICAgICAgICAgICAgICAKICAgICAgICAgICAgICBpZiBpc2luc3RhbmNlKHZhbHVlLCBsaXN0KTogICAgIAogICAgICAgICAgICAgICAgICBjb250aW51ZQoKICAgICAgICAgICAgICAKICAgICAgICAgICAgICBpZiAiKCIgaW4gcmtleSBhbmQgIikiIGluIHJrZXk6CiAgICAgICAgICAgICAgICAgIHRpdGxlID0gcmtleVtya2V5LmZpbmQoIigiKSsxOnJrZXkuZmluZCgiKSIpXQogICAgICAgICAgICAgICAgICBrZXkgPSBya2V5LnBhcnRpdGlvbignKCcpWzBdICAgCiAgICAgICAgICAgICAgZWxzZToKICAgICAgICAgICAgICAgICAgdGl0bGUgPSBya2V5CiAgICAgICAgICAgICAgICAgIGtleSA9IHJrZXkgCgogICAgICAgICAgICAgIGlmIGtleSBpbiBpdGVtOiAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgY1trZXldPXN0cihpdGVtLmdldChrZXksIiIpKQogICAgICAgICAgICAKICAgICAgICAgICAgalsiY3VzdG9tY2FyZHMiXVsiY2FyZHNkYXRhIl0uYXBwZW5kKGMpCgogICAgICAjaWYgbm90IGhhc2hNYXAuY29udGFpbnNLZXkoImNhcmRzIik6CiAgICAgIAogICAgICBoYXNoTWFwLnB1dCgiY2FyZHMiLGpzb24uZHVtcHMoaixlbnN1cmVfYXNjaWk9RmFsc2UpKQogICAgICAKICAgICAgaGFzaE1hcC5wdXQoIlJlZnJlc2hTY3JlZW4iLCIiKQoKICAgIHJldHVybiBoYXNoTWFwCgoKZGVmIG9wZW5fb2JqZWN0KGhhc2hNYXAsKmFyZ3MpOgogICAgCiAgICAjaGFzaE1hcC5wdXQoInRvYXN0IixzdHIoaGFzaE1hcC5nZXQoImN1cnJlbnRfcHJvY2Vzc19uYW1lIikpKQogICAgaGFzaE1hcC5wdXQoInJldHVybl9zZWxlY3RlZF9kYXRhIiwiIikKCiAgICBpZiBoYXNoTWFwLmNvbnRhaW5zS2V5KCJjbG9zaW5nIik6CiAgICAgICBoYXNoTWFwLnJlbW92ZSgiY2xvc2luZyIpCiAgICBlbGlmIGhhc2hNYXAuY29udGFpbnNLZXkoInJlc3VsdF9iYWNrIik6CiAgICAgICBoYXNoTWFwLnJlbW92ZSgicmVzdWx0X2JhY2siKSAgIAogICAgZWxzZToKCiAgICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoInNlbGVjdGVkX2NhcmRfa2V5Iik6CiAgICAgICAgaGFzaE1hcC5yZW1vdmUoInNlbGVjdGVkX2NhcmRfa2V5IikKCiAgICAgICAgCiAgICAgIAogICAgICBjbGFzc25hbWUgPSBhcmdzWzBdCiAgICAgIGZvcm1fbmFtZSA9IGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIikKCiAgICAgIGpjbGFzcyA9IGpzb24ubG9hZHMoc3VDbGFzcy5nZXRDbGFzc0J5TmFtZShjbGFzc25hbWUpKQoKICAgICAgcmVmb2JqZWN0cz1bXQoKICAgICAgaWYgaGFzaE1hcC5jb250YWluc0tleSgib2JqZWN0XyIrZm9ybV9uYW1lKToKCiAgICAgICAgam9iamVjdCA9IGpzb24ubG9hZHMoaGFzaE1hcC5nZXQoIm9iamVjdF8iK2Zvcm1fbmFtZSkpCgogICAgICAgIGZvciBya2V5LCB2YWx1ZSBpbiBqY2xhc3MuaXRlbXMoKToKICAgICAgICAgICAgaWYgcmtleT09Il9pZCI6CiAgICAgICAgICAgICAgICBjb250aW51ZQogICAgICAgICAgICBpZiBya2V5WzBdPT0iXyI6CiAgICAgICAgICAgICAgICBjb250aW51ZQogICAgICAgICAgICAKICAgICAgICAgICAgIAoKICAgICAgICAgICAgaWYgIigiIGluIHJrZXkgYW5kICIpIiBpbiBya2V5OgogICAgICAgICAgICAgICAgdGl0bGUgPSBya2V5W3JrZXkuZmluZCgiKCIpKzE6cmtleS5maW5kKCIpIildCiAgICAgICAgICAgICAgICBrZXkgPSBya2V5LnBhcnRpdGlvbignKCcpWzBdICAgCiAgICAgICAgICAgIGVsc2U6CiAgICAgICAgICAgICAgICB0aXRsZSA9IHJrZXkKICAgICAgICAgICAgICAgIGtleSA9IHJrZXkgICAgICAKCiAgICAgICAgICAgIGlmICJfcmVmIiBpbiB2YWx1ZToKICAgICAgICAgICAgICAgcmVmb2JqZWN0cy5hcHBlbmQoa2V5KSAgIAoKICAgICAgICAgICAgaWYgaGFzaE1hcC5jb250YWluc0tleShrZXkpOgogICAgICAgICAgICAgIGhhc2hNYXAucmVtb3ZlKGtleSkKCiAgICAgICAgZm9yIGtleSx2YWx1ZSBpbiBqb2JqZWN0Lml0ZW1zKCk6CiAgICAgICAgICBpZiAgaXNpbnN0YW5jZSh2YWx1ZSxkaWN0KToKICAgICAgICAgICAgICBoYXNoTWFwLnB1dChrZXkrIl92aWV3Iix2YWx1ZS5nZXQoIm5hbWUiKSkKICAgICAgICAgICAgICBoYXNoTWFwLnB1dChrZXksanNvbi5kdW1wcyh2YWx1ZSxlbnN1cmVfYXNjaWk9RmFsc2UpKQogICAgICAgICAgZWxpZiBrZXkgaW4gcmVmb2JqZWN0czoKICAgICAgICAgICAgICBoYXNoTWFwLnB1dChrZXkrIl92aWV3Iiwi0L/QviDRgdGB0YvQu9C60LUiKSAKICAgICAgICAgIGVsaWYga2V5PT0iX2lkIiBvciBrZXk9PSJpZCI6ICAKICAgICAgICAgICAgIGNvbnRpbnVlICAgCiAgICAgICAgICBlbHNlOgogICAgICAgICAgICBpZiBub3QgaXNpbnN0YW5jZSh2YWx1ZSxsaXN0KToKICAgICAgICAgICAgICBoYXNoTWFwLnB1dChrZXksdmFsdWUpCgoKICAgIHJldHVybiBoYXNoTWFwCgoKCmRlZiBvcGVuX29iamVjdF9mb3JtKGhhc2hNYXAsKmFyZ3MpOgogICAgCiAgICBoYXNoTWFwLnB1dCgiZGlzYWJsZV9ldmVudHMiLCIiKQogICAgaGFzaE1hcC5wdXQoInJldHVybl9zZWxlY3RlZF9kYXRhIiwiIikKICAgIAogICAgY2xhc3NuYW1lID0gYXJnc1swXQogICAgZm9ybV9uYW1lID0gYXJnc1sxXQogICAgaWYgbGVuKGFyZ3MpPjI6CiAgICAgIG9wZXIgPSBhcmdzWzJdCiAgICBlbHNlOgogICAgICBvcGVyPU5vbmUgICAKCiAgICBpZiBoYXNoTWFwLmNvbnRhaW5zS2V5KCJvYmplY3RfIitzdHIoaGFzaE1hcC5nZXQoImN1cnJlbnRfc2NyZWVuX25hbWUiKSkpOgogICAgICAgICAgaGFzaE1hcC5wdXQoInBhcmVudF9vYmplY3QiLCJvYmplY3RfIitzdHIoaGFzaE1hcC5nZXQoImN1cnJlbnRfc2NyZWVuX25hbWUiKSkpCiAgICAgICAgICBoYXNoTWFwLnB1dCgicGFyZW50X2NsYXNzIixoYXNoTWFwLmdldCgicGFyZW50X2NsYXNzIikpCgogICAgZWxzZTogICAKICAgICAgICAgIGhhc2hNYXAucHV0KCJwYXJlbnRfb2JqZWN0IiwiIikKICAgICAgICAgIGhhc2hNYXAucHV0KCJwYXJlbnRfY2xhc3MiLGNsYXNzbmFtZSkKICAgIAogICAgCiAgICBpZiBvcGVyPT0iPyI6ICPQtNC+0LHQsNCy0LvQtdC90LjQtQogICAgICAgamNsYXNzID0ganNvbi5sb2FkcyhzdUNsYXNzLmdldENsYXNzQnlOYW1lKGNsYXNzbmFtZSkpCiAKICAgICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoInNlbGVjdGVkX2NhcmRfa2V5Iik6CiAgICAgICAgICBoYXNoTWFwLnJlbW92ZSgic2VsZWN0ZWRfY2FyZF9rZXkiKQoKICAgICAgIGhhc2hNYXAucHV0KCJvYmplY3RfIitmb3JtX25hbWUsInt9IikKICAgICAgCiAgICAgICBoYXNoTWFwLnB1dCgiU2hvd1NjcmVlbiIsZm9ybV9uYW1lKSAKCiAgICBlbGlmIG9wZXI9PSI/PyI6CiAgICAgICBqY2xhc3MgPSBqc29uLmxvYWRzKHN1Q2xhc3MuZ2V0Q2xhc3NCeU5hbWUoY2xhc3NuYW1lKSkKICAKICAgICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoInNlbGVjdGVkX2NhcmRfa2V5Iik6CiAgICAgICAgICBqb2JqZWN0ID0ganNvbi5sb2FkcyhoYXNoTWFwLmdldCgib2JqZWN0XyIrc3RyKGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIikpKSkKICAgICAgICAgICNoYXNoTWFwLnB1dCgidG9hc3QiLGpzb24uZHVtcHMoaXRlbSxlbnN1cmVfYXNjaWk9RmFsc2UpKQogICAgICAgICAgZm9yIGl0ZW0gaW4gam9iamVjdFtoYXNoTWFwLmdldCgibmVzdGVkX3Byb3BlcnR5IildOgogICAgICAgICAgICBpZiBpdGVtWydfaWQnXT09aGFzaE1hcC5nZXQoJ3NlbGVjdGVkX2NhcmRfa2V5Jyk6CiAgICAgICAgICAgICAgCgogICAgICAgICAgICAgIGhhc2hNYXAucHV0KCJvYmplY3RfIitmb3JtX25hbWUsanNvbi5kdW1wcyhpdGVtLGVuc3VyZV9hc2NpaT1GYWxzZSkpCgogICAgICAgICAgICAgIGhhc2hNYXAucHV0KCJTaG93U2NyZWVuIixmb3JtX25hbWUpCiAgICAgICAgICAgICAgYnJlYWsKICAgICAgICAgIAogICAgICAgICAgCiAgICAgICAgICBoYXNoTWFwLnJlbW92ZSgic2VsZWN0ZWRfY2FyZF9rZXkiKSAgICAgIAogICAgICAgIAogICAgICAKICAgIGVsc2U6ICPRhNC+0YDQvNGLINGB0L/QuNGB0LrQvtCyCiAgICAKICAgICAgCiAgICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoInNlbGVjdGVkX2NhcmRfa2V5Iik6CiAgICAgICAgCiAgICAgICAgCiAgICAgICAgY29sbGVjdGlvbiA9IGRiW2NsYXNzbmFtZV0KCiAgICAgICAgI2pvYmplY3QgPWNvbGxlY3Rpb24uZmluZF9vbmUoaGFzaE1hcC5nZXQoInNlbGVjdGVkX2NhcmRfa2V5IikpCiAgICAgICAgam9iamVjdCA9Y29sbGVjdGlvbi5nZXQoaGFzaE1hcC5nZXQoInNlbGVjdGVkX2NhcmRfa2V5IikpCiAgICAgICAgam9iamVjdFsiX2lkIl09c3RyKGpvYmplY3RbIl9pZCJdKQogICAgICAKICAgICAgICBoYXNoTWFwLnB1dCgib2JqZWN0XyIrZm9ybV9uYW1lLGpzb24uZHVtcHMoam9iamVjdCxlbnN1cmVfYXNjaWk9RmFsc2UpKQogICAgICAgIGhhc2hNYXAucHV0KCJTaG93U2NyZWVuIixmb3JtX25hbWUpCiAgICAgICAgCiAgICAgIGVsc2U6CiAgICAgICAgCiAgICAgICAgaGFzaE1hcC5wdXQoIm9iamVjdF8iK2Zvcm1fbmFtZSwie30iKSAgIAoKICAgICAgCgogICAgaGFzaE1hcC5wdXQoIm5vUmVmcmVzaCIsIiIpCgogICAgcmV0dXJuIGhhc2hNYXAKCgpkZWYgb3Blbl9vYmplY3RfZm9ybV9yZWYoaGFzaE1hcCwqYXJncyk6CiAgICAKICAgIGhhc2hNYXAucHV0KCJkaXNhYmxlX2V2ZW50cyIsIiIpCiAgICBoYXNoTWFwLnB1dCgicmV0dXJuX3NlbGVjdGVkX2RhdGEiLCIiKQogICAgCiAgICBjbGFzc25hbWUgPSBhcmdzWzBdCiAgICBmb3JtX25hbWUgPSBhcmdzWzFdCiAgICBpZiBsZW4oYXJncyk+MjoKICAgICAgb3BlciA9IGFyZ3NbMl0KICAgIGVsc2U6CiAgICAgIG9wZXI9Tm9uZSAgIAoKICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoIm9iamVjdF8iK3N0cihoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKSk6CiAgICAgICAgICBoYXNoTWFwLnB1dCgicGFyZW50X29iamVjdCIsIm9iamVjdF8iK3N0cihoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKSkKICAgICAgICAgIGhhc2hNYXAucHV0KCJwYXJlbnRfY2xhc3MiLGhhc2hNYXAuZ2V0KCJwYXJlbnRfY2xhc3MiKSkKCiAgICBlbHNlOiAgIAogICAgICAgICAgaGFzaE1hcC5wdXQoInBhcmVudF9vYmplY3QiLCIiKQogICAgICAgICAgaGFzaE1hcC5wdXQoInBhcmVudF9jbGFzcyIsY2xhc3NuYW1lKQogICAgCiAgICAKICAgIGlmIG9wZXI9PSI/IjogI9C00L7QsdCw0LLQu9C10L3QuNC1CiAgICAgICBqY2xhc3MgPSBqc29uLmxvYWRzKHN1Q2xhc3MuZ2V0Q2xhc3NCeU5hbWUoY2xhc3NuYW1lKSkKIAogICAgICAgaWYgaGFzaE1hcC5jb250YWluc0tleSgic2VsZWN0ZWRfY2FyZF9rZXkiKToKICAgICAgICAgIGhhc2hNYXAucmVtb3ZlKCJzZWxlY3RlZF9jYXJkX2tleSIpCgogICAgICAgaGFzaE1hcC5wdXQoIm9iamVjdF8iK2Zvcm1fbmFtZSwie30iKQoKICAgICAgIGhhc2hNYXAucHV0KCJTaG93U2NyZWVuIixmb3JtX25hbWUpCiAgICAgICBoYXNoTWFwLnB1dCgiX2tleSIsImFkZF9yZXMiKQogICAgICAgaGFzaE1hcC5wdXQoInJlc3VsdF9wcm9jZXNzIixoYXNoTWFwLmdldCgiY3VycmVudF9wcm9jZXNzX25hbWUiKSkKICAgICAgIGhhc2hNYXAucHV0KCJyZXN1bHRfc2NyZWVuIixoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKQogICAgICAgaGFzaE1hcC5wdXQoInVwZGF0ZV9uZXN0ZWRfcHJvcGVydHkiLGNsYXNzbmFtZSkKICAgICAgIAoKICAgICAgCiAgICAgICAjaGFzaE1hcC5wdXQoIlNob3dQcm9jZXNzUmVzdWx0Iixmb3JtX25hbWUpIAogICAgICAgI2hhc2hNYXAucHV0KCJTZXRSZXN1bHRMaXN0ZW5lciIsImNlbGxfcmVzIikgCgogICAgZWxpZiBvcGVyPT0iPz8iOgogICAgICAgamNsYXNzID0ganNvbi5sb2FkcyhzdUNsYXNzLmdldENsYXNzQnlOYW1lKGNsYXNzbmFtZSkpCiAgCiAgICAgICBpZiBoYXNoTWFwLmNvbnRhaW5zS2V5KCJzZWxlY3RlZF9jYXJkX2tleSIpOgogICAgICAgICAgam9iamVjdCA9IGpzb24ubG9hZHMoaGFzaE1hcC5nZXQoIm9iamVjdF8iK3N0cihoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKSkpCiAgICAgICAgICBoYXNoTWFwLnB1dCgidG9hc3QiLGpzb24uZHVtcHMoam9iamVjdCxlbnN1cmVfYXNjaWk9RmFsc2UpKQogICAgICAgICAgZm9yIGl0ZW0gaW4gam9iamVjdFtoYXNoTWFwLmdldCgibmVzdGVkX3Byb3BlcnR5IildOgogICAgICAgICAgICAgCiAgICAgICAgICAgIGlmIHN0cihpdGVtKT09aGFzaE1hcC5nZXQoJ3NlbGVjdGVkX2NhcmRfa2V5Jyk6CgogICAgICAgICAgICAgIGRibmFtZSA9IGRiCgogICAgICAgICAgICAgIGNsYXNzX2NvbGxlY3Rpb24gPSBqY2xhc3MuZ2V0KGhhc2hNYXAuZ2V0KCJuZXN0ZWRfcHJvcGVydHkiKSkKICAgICAgICAgICAgICBjbGFzc19jb2xsZWN0aW9uX25hbWUgPSBjbGFzc19jb2xsZWN0aW9uWzBdLnJlcGxhY2UoIl9yZWYiLCIiKQogICAgICAgICAgICAgIAogICAgICAgICAgICAgIGpvYmplY3Rfb3BlbiA9IGRibmFtZVtjbGFzc19jb2xsZWN0aW9uX25hbWVdLmdldChoYXNoTWFwLmdldCgnc2VsZWN0ZWRfY2FyZF9rZXknKSkKCiAgICAgICAgICAgICAgaGFzaE1hcC5wdXQoIm9iamVjdF8iK2Zvcm1fbmFtZSxqc29uLmR1bXBzKGpvYmplY3Rfb3BlbixlbnN1cmVfYXNjaWk9RmFsc2UpKQogICAgICAgICAgICAgIAoKICAgICAgICAgICAgICBoYXNoTWFwLnB1dCgiU2hvd1NjcmVlbiIsZm9ybV9uYW1lKQoKICAgICAgICAgICAgICAKICAgICAgICAgICAgICBoYXNoTWFwLnB1dCgicmVzdWx0X3Byb2Nlc3MiLGhhc2hNYXAuZ2V0KCJjdXJyZW50X3Byb2Nlc3NfbmFtZSIpKQogICAgICAgICAgICAgIGhhc2hNYXAucHV0KCJyZXN1bHRfc2NyZWVuIixoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKQogICAgICAgICAgICAgIAogICAgICAgICAgICAgIGJyZWFrCiAgICAgICAgICAKICAgICAgICAgIAogICAgICAgICAgaGFzaE1hcC5yZW1vdmUoInNlbGVjdGVkX2NhcmRfa2V5IikgICAgICAKICAgCiAgICByZXR1cm4gaGFzaE1hcAoKZGVmIHNhdmVfb2JqZWN0KGhhc2hNYXAsKmFyZ3MpOgogICAgY2xhc3NuYW1lID0gYXJnc1swXQoKICAgIGRlbGV0ZT1GYWxzZQogICAgaWYgbGVuKGFyZ3MpPjE6CiAgICAgICBkZWxldGU9VHJ1ZQogICAgCiAgICAjaGFzaE1hcC5wdXQoIm5vX2NsZWFyX2htIiwiIikKICAgCiAgICBqY2xhc3MgPSBqc29uLmxvYWRzKHN1Q2xhc3MuZ2V0Q2xhc3NCeU5hbWUoY2xhc3NuYW1lKSkKICAgIAogICAgaWYgaGFzaE1hcC5nZXQoInBhcmVudF9vYmplY3QiKT09IiIgb3IgaGFzaE1hcC5nZXQoInBhcmVudF9jbGFzcyIpPT1jbGFzc25hbWU6CiAgICAgIAogICAgICBoYXNoTWFwLnB1dCgiU2hvd1NjcmVlbiIsImxpc3RfZm9ybSIpCgogICAgICBjb2xsZWN0aW9uX25hbWUgPSBjbGFzc25hbWUKICAgICAgam9iamVjdCA9IGpzb24ubG9hZHMoaGFzaE1hcC5nZXQoIm9iamVjdF8iK3N0cihoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKSkpCgogICAgICBpZiBkZWxldGU6CiAgICAgICAgIAogICAgICAgICAKICAgICAgICAgY29sbGVjdGlvbiA9IGRiW2NvbGxlY3Rpb25fbmFtZV0KICAgICAgICAgY29sbGVjdGlvbi5kZWxldGUoam9iamVjdC5nZXQoIl9pZCIpKQoKICAgICAgICAgaGFzaE1hcC5yZW1vdmUoIm9iamVjdCIpCiAgICAgICAgICNoYXNoTWFwLnB1dCgiQmFja1NjcmVlbiIsIiIpCiAgICAgICAgIGhhc2hNYXAucHV0KCJTaG93U2NyZWVuIiwibGlzdF9mb3JtIikKICAgICAgZWxzZTogIAogICAgICAgIAogICAgICAgIGluZGV4ID0gIiIKICAgICAgICBmb3IgcmtleSwgdmFsdWUgaW4gamNsYXNzLml0ZW1zKCk6CiAgICAgICAgICAgIGlmIHJrZXk9PSJfaWQiOgogICAgICAgICAgICAgICAgY29udGludWUKICAgICAgICAgICAgaWYgcmtleVswXT09Il8iOgogICAgICAgICAgICAgICAgY29udGludWUKICAgICAgICAgICAgaWYgcmtleT09Il9pbmRleCI6CiAgICAgICAgICAgICAgICBjb250aW51ZSAgCiAgICAgICAgICAgIAogICAgICAgICAgICBpZiAiKCIgaW4gcmtleSBhbmQgIikiIGluIHJrZXk6CiAgICAgICAgICAgICAgICB0aXRsZSA9IHJrZXlbcmtleS5maW5kKCIoIikrMTpya2V5LmZpbmQoIikiKV0KICAgICAgICAgICAgICAgIGtleSA9IHJrZXkucGFydGl0aW9uKCcoJylbMF0gICAKICAgICAgICAgICAgZWxzZToKICAgICAgICAgICAgICAgIHRpdGxlID0gcmtleQogICAgICAgICAgICAgICAga2V5ID0gcmtleSAgICAgIAoKICAgICAgICAgICAgaWYgaGFzaE1hcC5jb250YWluc0tleShrZXkpOgogICAgICAgICAgICAgIHYgPSBoYXNoTWFwLmdldChrZXkpCiAgICAgICAgICAgICAgaWYgInsiIGluIHYgYW5kICJ9IiBpbiB2OgogICAgICAgICAgICAgICAgIGp2ID0ganNvbi5sb2Fkcyh2KQogICAgICAgICAgICAgICAgIGpvYmplY3Rba2V5XT1qdgogICAgICAgICAgICAgIGVsc2U6ICAgCiAgICAgICAgICAgICAgICAgam9iamVjdFtrZXldPWhhc2hNYXAuZ2V0KGtleSkKICAgICAgICAgICAgaWYgIioiIGluIHZhbHVlOgogICAgICAgICAgICAgIGluZGV4ID0gaW5kZXggKyBqb2JqZWN0W2tleV0gICAgIAogICAgICAgIGZvciBya2V5LCB2YWx1ZSBpbiBqY2xhc3MuaXRlbXMoKTogICAgICAKICAgICAgICAgICAgaWYgIl9pbmRleCIgaW4gcmtleToKICAgICAgICAgICAgICAgIGpvYmplY3RbcmtleV0gPSBpbmRleC5sb3dlcigpCiAgICAgICAgCiAgICAgICAgY29sbGVjdGlvbiA9IGRiW2NvbGxlY3Rpb25fbmFtZV0KICAgICAgICBwb3N0X2lkID0gY29sbGVjdGlvbi5pbnNlcnQoam9iamVjdCx1cHNlcnQ9VHJ1ZSkKICAgICAgICBqb2JqZWN0WyJfaWQiXT1zdHIocG9zdF9pZCkKCiAgICAKICAgIGVsc2U6CiAgICAgICAKICAgICAgIGhhc2hNYXAucHV0KCJCYWNrU2NyZWVuIiwiIikKCiAgICAgICBqY3VycmVudF9vYmplY3QgPSBqc29uLmxvYWRzKGhhc2hNYXAuZ2V0KCJvYmplY3RfIitzdHIoaGFzaE1hcC5nZXQoImN1cnJlbnRfc2NyZWVuX25hbWUiKSkpKQogICAgICAgam9iamVjdCA9ICBqc29uLmxvYWRzKGhhc2hNYXAuZ2V0KGhhc2hNYXAuZ2V0KCJwYXJlbnRfb2JqZWN0IikpKQoKICAgICAgIGNvbGxlY3Rpb25fbmFtZT1oYXNoTWFwLmdldCgicGFyZW50X2NsYXNzIikgCiAgICAgICBpbmRleCA9ICIiIAogICAgICAgZm9yIHJrZXksIHZhbHVlIGluIGpjbGFzcy5pdGVtcygpOgogICAgICAgICAgaWYgcmtleT09Il9pZCI6CiAgICAgICAgICAgICAgY29udGludWUKICAgICAgICAgIGlmIHJrZXlbMF09PSJfIjoKICAgICAgICAgICAgICBjb250aW51ZQogICAgICAgICAgaWYgcmtleT09Il9pbmRleCI6CiAgICAgICAgICAgICAgY29udGludWUgICAKICAgICAgICAgIAogICAgICAgICAgaWYgIigiIGluIHJrZXkgYW5kICIpIiBpbiBya2V5OgogICAgICAgICAgICAgIHRpdGxlID0gcmtleVtya2V5LmZpbmQoIigiKSsxOnJrZXkuZmluZCgiKSIpXQogICAgICAgICAgICAgIGtleSA9IHJrZXkucGFydGl0aW9uKCcoJylbMF0gICAKICAgICAgICAgIGVsc2U6CiAgICAgICAgICAgICAgdGl0bGUgPSBya2V5CiAgICAgICAgICAgICAga2V5ID0gcmtleSAgICAgIAogICAgICAgICAgCiAgICAgICAgICBpZiBoYXNoTWFwLmNvbnRhaW5zS2V5KGtleSk6CiAgICAgICAgICAgICB2ID0gaGFzaE1hcC5nZXQoa2V5KQogICAgICAgICAgICAgaWYgInsiIGluIHYgYW5kICJ9IiBpbiB2OgogICAgICAgICAgICAgICAgIGp2ID0ganNvbi5sb2Fkcyh2KQogICAgICAgICAgICAgICAgIGpjdXJyZW50X29iamVjdFtrZXldPWp2CiAgICAgICAgICAgICBlbHNlOiAgIAogICAgICAgICAgICAgICAgIGpjdXJyZW50X29iamVjdFtrZXldPWhhc2hNYXAuZ2V0KGtleSkKICAgICAgICAgICAgICNqY3VycmVudF9vYmplY3Rba2V5XT1oYXNoTWFwLmdldChrZXkpIAogICAgICAgICAgaWYgIioiIGluIHZhbHVlOgogICAgICAgICAgICBpbmRleCA9IGluZGV4ICsgam9iamVjdFtrZXldIAogICAgICAgICAgICAKICAgICAgIGZvciBya2V5LCB2YWx1ZSBpbiBqY2xhc3MuaXRlbXMoKTogICAgICAKICAgICAgICAgICAgaWYgcmtleT09Il9pbmRleCI6CiAgICAgICAgICAgICAgICBqb2JqZWN0W3JrZXldID0gaW5kZXgubG93ZXIoKSAKICAgICAgIGlmIG5vdCAiX2lkIiBpbiBqY3VycmVudF9vYmplY3Q6ICPQtNC+0LHQsNCy0LvQtdC90LjQtQogICAgICAgICAgamN1cnJlbnRfb2JqZWN0WydfaWQnXT0gIHN0cih1dWlkLnV1aWQ0KCkuaGV4KQoKICAgICAgICAgIGlmIG5vdCBoYXNoTWFwLmdldCgibmVzdGVkX3Byb3BlcnR5IikgaW4gam9iamVjdDoKICAgICAgICAgICAgam9iamVjdFtoYXNoTWFwLmdldCgibmVzdGVkX3Byb3BlcnR5IildPVtdCgogICAgICAgICAgam9iamVjdFtoYXNoTWFwLmdldCgibmVzdGVkX3Byb3BlcnR5IildLmFwcGVuZChqY3VycmVudF9vYmplY3QpCiAgICAgICAKICAgICAgIGVsc2U6ICAgCiAgICAgICAgICBvYmplY3RsaXN0ID0gam9iamVjdFtoYXNoTWFwLmdldCgibmVzdGVkX3Byb3BlcnR5IildCiAgICAgICAgICBmb3IgaW5kZXgsIGl0ZW0gIGluIGVudW1lcmF0ZShvYmplY3RsaXN0KToKICAgICAgICAgICBpZiBqY3VycmVudF9vYmplY3QuZ2V0KCJfaWQiKT09aXRlbS5nZXQoIl9pZCIpOgogICAgICAgICAgICBpZiBkZWxldGU6CiAgICAgICAgICAgICAgb2JqZWN0bGlzdC5wb3AoaW5kZXgpCiAgICAgICAgICAgICAKICAgICAgICAgICAgZWxzZTogICAKICAgICAgICAgICAgICBvYmplY3RsaXN0W2luZGV4XSA9IGpjdXJyZW50X29iamVjdCAgIAogICAgICAgICAgICBqb2JqZWN0W2hhc2hNYXAuZ2V0KCJuZXN0ZWRfcHJvcGVydHkiKV09IG9iamVjdGxpc3QKICAgICAgICAgICAgCgoKICAgICAgICAgICAgYnJlYWsKCiAgICAgICAgICAgIAoKICAgIAoKICAgICAgIAoKICAgICAgIGhhc2hNYXAucHV0KHN0cihoYXNoTWFwLmdldCgicGFyZW50X29iamVjdCIpKSxqc29uLmR1bXBzKGpvYmplY3QsZW5zdXJlX2FzY2lpPUZhbHNlKSkKICAgICAgICAKCiAgICBoYXNoTWFwLnJlbW92ZSgib2JqZWN0XyIrc3RyKGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIikpKSAgCgoKICAgIGpjbGFzcyA9IGpzb24ubG9hZHMoc3VDbGFzcy5nZXRDbGFzc0J5TmFtZShjbGFzc25hbWUpKQoKICAgIGZvciBya2V5LCB2YWx1ZSBpbiBqY2xhc3MuaXRlbXMoKToKICAgICAgICAKICAgICAgICBpZiBya2V5WzBdPT0iXyI6CiAgICAgICAgICAgICBjb250aW51ZQogICAgICAgIAogICAgICAgIGlmICIoIiBpbiBya2V5IGFuZCAiKSIgaW4gcmtleToKICAgICAgICAgICAgdGl0bGUgPSBya2V5W3JrZXkuZmluZCgiKCIpKzE6cmtleS5maW5kKCIpIildCiAgICAgICAgICAgIGtleSA9IHJrZXkucGFydGl0aW9uKCcoJylbMF0gICAKICAgICAgICBlbHNlOgogICAgICAgICAgICAgdGl0bGUgPSBya2V5CiAgICAgICAgICAgICBrZXkgPSBya2V5ICAgICAgCgogICAgICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoa2V5KToKICAgICAgICAgICBoYXNoTWFwLnJlbW92ZShrZXkpIAoKICAgICAgICBpZiBoYXNoTWFwLmNvbnRhaW5zS2V5KGtleSsiX3ZpZXciKToKICAgICAgICAgICBoYXNoTWFwLnJlbW92ZShrZXkrIl92aWV3IikgICAgCiAgIAoKICAgIAogICAKICAgIAogICAgI2hhc2hNYXAucHV0KCJjbG9zaW5nIiwiIikKCiAgICByZXR1cm4gaGFzaE1hcAoKZGVmIGNsb3NlX3dpdGhvdXRfc2F2aW5nKGhhc2hNYXAsKmFyZ3MpOgogICAgY2xhc3NuYW1lID0gYXJnc1swXQoKICAgIGhhc2hNYXAucmVtb3ZlKCJvYmplY3RfIitzdHIoaGFzaE1hcC5nZXQoImN1cnJlbnRfc2NyZWVuX25hbWUiKSkpICAKCgogICAgamNsYXNzID0ganNvbi5sb2FkcyhzdUNsYXNzLmdldENsYXNzQnlOYW1lKGNsYXNzbmFtZSkpCgogICAgZm9yIHJrZXksIHZhbHVlIGluIGpjbGFzcy5pdGVtcygpOgogICAgICAgIAogICAgICAgIGlmIHJrZXlbMF09PSJfIjoKICAgICAgICAgICAgIGNvbnRpbnVlCiAgICAgICAgCiAgICAgICAgaWYgIigiIGluIHJrZXkgYW5kICIpIiBpbiBya2V5OgogICAgICAgICAgICB0aXRsZSA9IHJrZXlbcmtleS5maW5kKCIoIikrMTpya2V5LmZpbmQoIikiKV0KICAgICAgICAgICAga2V5ID0gcmtleS5wYXJ0aXRpb24oJygnKVswXSAgIAogICAgICAgIGVsc2U6CiAgICAgICAgICAgICB0aXRsZSA9IHJrZXkKICAgICAgICAgICAgIGtleSA9IHJrZXkgICAgICAKCiAgICAgICAgaWYgaGFzaE1hcC5jb250YWluc0tleShrZXkpOgogICAgICAgICAgIGhhc2hNYXAucmVtb3ZlKGtleSkgCgogICAgICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoa2V5KyJfdmlldyIpOgogICAgICAgICAgIGhhc2hNYXAucmVtb3ZlKGtleSsiX3ZpZXciKSAgICAKICAgCiAgIAogICAgI2lmIGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIik9PSJlZGl0X3NjcmVlbiI6CiAgICAjICBoYXNoTWFwLnB1dCgiU2hvd1NjcmVlbiIsImxpc3RfZm9ybSIpCiAgICAjZWxzZTogICAgCiAgICBoYXNoTWFwLnB1dCgiQmFja1NjcmVlbiIsIiIpCiAgICAKICAgIGhhc2hNYXAucHV0KCJjbG9zZSIsIiIpCgogICAgcmV0dXJuIGhhc2hNYXAKCmRlZiBkZWxldGVfb2JqZWN0KGhhc2hNYXAsKmFyZ3MpOgogICAgY2xhc3NuYW1lID0gYXJnc1swXQogICAKICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoIm5lc3RlZF9vYmplY3QiKToKICAgICAgam9iamVjdCA9anNvbi5sb2FkcyhoYXNoTWFwLmdldCgibmVzdGVkX29iamVjdCIpKQogICAgICAKICAgICAgY29sbGVjdGlvbiA9IGRiW2NsYXNzbmFtZV0KICAgICAgY29sbGVjdGlvbi5kZWxldGUoam9iamVjdC5nZXQoIl9pZCIpKQoKICAgICAgaGFzaE1hcC5yZW1vdmUoIm9iamVjdCIpCiAgICAgIGhhc2hNYXAucHV0KCJCYWNrU2NyZWVuIiwiIikKICAgIGVsaWYgaGFzaE1hcC5jb250YWluc0tleSgib2JqZWN0Iik6CiAgICAgIGpvYmplY3QgPWpzb24ubG9hZHMoaGFzaE1hcC5nZXQoIm9iamVjdCIpKQogICAgICAKICAgICAgY29sbGVjdGlvbiA9IGRiW2NsYXNzbmFtZV0KICAgICAgY29sbGVjdGlvbi5kZWxldGUoam9iamVjdC5nZXQoIl9pZCIpKQoKICAgICAgaGFzaE1hcC5yZW1vdmUoIm9iamVjdCIpCiAgICAgIGhhc2hNYXAucHV0KCJCYWNrU2NyZWVuIiwiIikKICAgIAoKICAgIHJldHVybiBoYXNoTWFwCgoKZGVmIHN0YXJ0X3NlbGVjdGlvbl9mb3JfZmllbGQoaGFzaE1hcCwqYXJncyk6CiAgICAKICAgIAoKICAgIHByb2Nlc3MgPSAgYXJnc1swXSAgCiAgICBzY3JlZW4gPSAgYXJnc1sxXSAgCiAgICBmaWVsZCA9ICBhcmdzWzJdICAKCiAgICAjaGFzaE1hcC5wdXQoIlN3aXRjaFByb2Nlc3NTY3JlZW4iLHByb2Nlc3MrInwiK3NjcmVlbikKICAgIGhhc2hNYXAucHV0KCJTaG93U2NyZWVuIixwcm9jZXNzKyJ8IitzY3JlZW4pCiAgICAjaGFzaE1hcC5wdXQoIlNldFJlc3VsdExpc3RlbmVyIixmaWVsZCsiX3JlcyIpCiAgICBoYXNoTWFwLnB1dCgiX2tleSIsZmllbGQrIl9yZXMiKQoKICAgIGhhc2hNYXAucHV0KCJyZXN1bHRfcHJvY2VzcyIsaGFzaE1hcC5nZXQoImN1cnJlbnRfcHJvY2Vzc19uYW1lIikpCiAgICBoYXNoTWFwLnB1dCgicmVzdWx0X3NjcmVlbiIsaGFzaE1hcC5nZXQoImN1cnJlbnRfc2NyZWVuX25hbWUiKSkKCgoKICAgIAoKICAgIHJldHVybiBoYXNoTWFwCgoKZGVmIHJldHVybl9yZXN1bHQoaGFzaE1hcCwqYXJncyk6CiAgICAKICAgIAogICAga2V5ID1zdHIoaGFzaE1hcC5nZXQoIl9rZXkiKSlbOmhhc2hNYXAuZ2V0KCJfa2V5IikuZmluZCgiX3JlcyIpXSAKICAgIAogICAgICAgCiAgICAjaGFzaE1hcC5wdXQoIkZpbmlzaFByb2Nlc3MiLCIiKQogICAgI2hhc2hNYXAucHV0KCJTd2l0Y2hQcm9jZXNzU2NyZWVuIixoYXNoTWFwLmdldCgicmVzdWx0X3Byb2Nlc3MiKSsifCIraGFzaE1hcC5nZXQoInJlc3VsdF9zY3JlZW4iKSkKICAgIGhhc2hNYXAucHV0KCJTaG93U2NyZWVuIixoYXNoTWFwLmdldCgicmVzdWx0X3NjcmVlbiIpKQogICAgCiAgICBoYXNoTWFwLnB1dChrZXksaGFzaE1hcC5nZXQoInNlbGVjdGVkX2NhcmRfZGF0YSIpKQogICAgamNhcmQgPSBqc29uLmxvYWRzKGhhc2hNYXAuZ2V0KGtleSkpCiAgICAjaGFzaE1hcC5wdXQoInJldHVybl9yZXN1bHRfdG9fIixoYXNoTWFwLmdldCgic2VsZWN0ZWRfY2FyZF9kYXRhIikpCiAgICBoYXNoTWFwLnB1dCgicmVzdWx0X2JhY2siLCIiKQogICAgaGFzaE1hcC5wdXQoa2V5KyJfdmlldyIsamNhcmQuZ2V0KCJuYW1lIiwiPG5vbmFtZT4iKSkKICAgIGpjdXJyZW50X29iamVjdCA9IGpzb24ubG9hZHMoaGFzaE1hcC5nZXQoIm9iamVjdF8iK3N0cihoYXNoTWFwLmdldCgicmVzdWx0X3NjcmVlbiIpKSkpCiAgICBoYXNoTWFwLnB1dCgib2JqZWN0XyIrc3RyKGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIikpLGpzb24uZHVtcHMoamN1cnJlbnRfb2JqZWN0LGVuc3VyZV9hc2NpaT1GYWxzZSkpCiAgICAKICAgIGhhc2hNYXAucHV0KCJub1JlZnJlc2giLCIiKQoKICAgIHJldHVybiBoYXNoTWFwCgpkZWYgc2V0X29iamVjdF92YWx1ZShoYXNoTWFwLCphcmdzKToKICAgIGtleSA9ICBhcmdzWzBdIAogICAgYXNyZWYgPSAgYXJnc1sxXSAgCgogICAgI2hhc2hNYXAucHV0KCJ0b2FzdCIsInNldF9vYmplY3RfdmFsdWUiKQoKICAgIGpjYXJkID0ganNvbi5sb2FkcyhoYXNoTWFwLmdldChrZXkpKQoKICAgIHYgPSBpdUNsYXNzLmdldFZpZXcoa2V5KQogICAgdi5zZXRUZXh0KGpjYXJkLmdldCgibmFtZSIsIm5vbmFtZSIpKQoKICAgIGhhc2hNYXAucHV0KGtleSsiX3ZpZXciLGpjYXJkLmdldCgibmFtZSIsIm5vbmFtZSIpKQoKICAgIGpjdXJyZW50X29iamVjdCA9IGpzb24ubG9hZHMoaGFzaE1hcC5nZXQoIm9iamVjdF8iK3N0cihoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKSkpCiAgICBpZiBhc3JlZj09IjEiOgogICAgICBqY3VycmVudF9vYmplY3Rba2V5XSA9IHsiX2lkIjpqY2FyZFsiX2lkIl0gLCJuYW1lIjogamNhcmQuZ2V0KCJuYW1lIiwibm9uYW1lIil9CiAgICAgIGhhc2hNYXAucHV0KGtleSxqc29uLmR1bXBzKGpjdXJyZW50X29iamVjdFtrZXldLGVuc3VyZV9hc2NpaT1GYWxzZSkpCiAgICBlbHNlOiAgCiAgICAgIGpjdXJyZW50X29iamVjdFtrZXldID0gamNhcmQKCiAgICBoYXNoTWFwLnB1dCgib2JqZWN0XyIrc3RyKGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIikpLGpzb24uZHVtcHMoamN1cnJlbnRfb2JqZWN0LGVuc3VyZV9hc2NpaT1GYWxzZSkpCgogICAgaGFzaE1hcC5wdXQoIm5vUmVmcmVzaCIsIiIpCgogICAgcmV0dXJuIGhhc2hNYXAKCmRlZiBhZGRfb2JqZWN0X3JlZihoYXNoTWFwLCphcmdzKToKICAgIAogICAgY2xhc3NuYW1lID0gIGFyZ3NbMF0gCiAgICBzZWxlY3RlZF9vYmplY3Rfa2V5ID0gIGFyZ3NbMV0gCgogICAgamN1cnJlbnRfb2JqZWN0ID0ganNvbi5sb2FkcyhoYXNoTWFwLmdldCgib2JqZWN0XyIrc3RyKGhhc2hNYXAuZ2V0KCJjdXJyZW50X3NjcmVlbl9uYW1lIikpKSkKICAgIGpzZWxlY3RlZF9vYmplY3Q9anNvbi5sb2FkcyhoYXNoTWFwLmdldChzZWxlY3RlZF9vYmplY3Rfa2V5KSkKCiAgICBpZiBub3QgaGFzaE1hcC5nZXQoIm5lc3RlZF9wcm9wZXJ0eSIpIGluIGpjdXJyZW50X29iamVjdDoKICAgICAgamN1cnJlbnRfb2JqZWN0W2hhc2hNYXAuZ2V0KCJuZXN0ZWRfcHJvcGVydHkiKV09W10KCiAgICBqY3VycmVudF9vYmplY3RbaGFzaE1hcC5nZXQoIm5lc3RlZF9wcm9wZXJ0eSIpXS5hcHBlbmQoanNlbGVjdGVkX29iamVjdC5nZXQoIl9pZCIpKQoKICAgIAogICAgY29sbGVjdGlvbiA9IGRiW2NsYXNzbmFtZV0KICAgIHBvc3RfaWQgPSBjb2xsZWN0aW9uLmluc2VydChqY3VycmVudF9vYmplY3QsdXBzZXJ0PVRydWUpCiAgICBqY3VycmVudF9vYmplY3RbIl9pZCJdPXN0cihwb3N0X2lkKQogICAgCgogICAgaGFzaE1hcC5wdXQoIm9iamVjdF8iK3N0cihoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKSxqc29uLmR1bXBzKGpjdXJyZW50X29iamVjdCxlbnN1cmVfYXNjaWk9RmFsc2UpKQoKICAgIGlmIGhhc2hNYXAuY29udGFpbnNLZXkoIm5vUmVmcmVzaCIpOgogICAgICAgaGFzaE1hcC5yZW1vdmUoIm5vUmVmcmVzaCIpCgogICAgcmV0dXJuIGhhc2hNYXAKCmRlZiBkZWxldGVfb2JqZWN0X3JlZihoYXNoTWFwLCphcmdzKToKICAgIAogICAgY2xhc3NuYW1lID0gIGFyZ3NbMF0gCiAgICAKCiAgICBqY3VycmVudF9vYmplY3QgPSBqc29uLmxvYWRzKGhhc2hNYXAuZ2V0KGhhc2hNYXAuZ2V0KCJwYXJlbnRfb2JqZWN0IikpKQogICAganNlbGVjdGVkX29iamVjdD1qc29uLmxvYWRzKGhhc2hNYXAuZ2V0KCJvYmplY3RfIitoYXNoTWFwLmdldCgiY3VycmVudF9zY3JlZW5fbmFtZSIpKSkKCiAgICAKICAgIGZvciBpLGl0ZW0gaW4gZW51bWVyYXRlKGpjdXJyZW50X29iamVjdFtoYXNoTWFwLmdldCgibmVzdGVkX3Byb3BlcnR5IildLmNvcHkoKSk6CiAgICAgIGlmIGl0ZW0gPT0ganNlbGVjdGVkX29iamVjdFsnX2lkJ106CiAgICAgICAgamN1cnJlbnRfb2JqZWN0W2hhc2hNYXAuZ2V0KCJuZXN0ZWRfcHJvcGVydHkiKV0ucG9wKGkpCiAgICAgICAgaGFzaE1hcC5wdXQoInNwZWFrIixzdHIoaSkpCiAgICAKICAgIGNvbGxlY3Rpb24gPSBkYltoYXNoTWFwLmdldCgicGFyZW50X2NsYXNzIildCiAgICAKICAgIHVwZGF0ZWQgPSBqY3VycmVudF9vYmplY3QuY29weSgpCiAgICAjdXBkYXRlZC5wb3AoIl9pZCIpCgogICAgY29sbGVjdGlvbi51cGRhdGUoamN1cnJlbnRfb2JqZWN0LHVwZGF0ZWQpCiAgIAogICAgaGFzaE1hcC5wdXQoc3RyKGhhc2hNYXAuZ2V0KCJwYXJlbnRfb2JqZWN0IikpLGpzb24uZHVtcHMoamN1cnJlbnRfb2JqZWN0LGVuc3VyZV9hc2NpaT1GYWxzZSkpCgogICAgaWYgaGFzaE1hcC5jb250YWluc0tleSgibm9SZWZyZXNoIik6CiAgICAgICAgaGFzaE1hcC5yZW1vdmUoIm5vUmVmcmVzaCIpCgogICAgaGFzaE1hcC5wdXQoIkJhY2tTY3JlZW4iLCIiKQoKICAgIHJldHVybiBoYXNoTWFw",
+        "RunPython": true,
+        "PyFiles": [],
+        "StyleTemplates": [
+            {
+                "name": "Новый шаблон стиля",
+                "use_as_class": false,
+                "TextBold": false,
+                "TextItalic": true
+            }
+        ],
+        "host_uid": "3fc1d4d105434f57837157ea784a73d2",
+        "ConfigurationFileName": "gentest1.ui",
+        "agent": false,
+        "ForegroundService": false,
+        "StopForegroundServiceOnExit": false,
+        "BroadcastIntent": "",
+        "BroadcastVariable": "",
+        "FaceRecognitionURL": "",
+        "OnKeyboardMain": false,
+        "LaunchProcess": "",
+        "LaunchVar": "",
+        "MenuWebTemplate": "",
+        "Launch": "",
+        "HTMLHead": "",
+        "uid": "d992fc5102314db98c23fb3610108d3a"
+    }
+}
